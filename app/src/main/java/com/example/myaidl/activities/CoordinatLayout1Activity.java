@@ -32,7 +32,9 @@ public class CoordinatLayout1Activity extends AppCompatActivity {
 
         tv.append("Thread.currentThread().getName() " +Thread.currentThread().getName()+"\n");
 
-        System.out.println(">>>>>>"+Looper.getMainLooper().hashCode());;
+        System.out.println(">>>>>>"+Looper.getMainLooper().hashCode());
+
+        show();
     }
 
 
@@ -53,57 +55,78 @@ public class CoordinatLayout1Activity extends AppCompatActivity {
 
           @Override
             public void run() {
-                Looper.prepare();
+                //Looper.prepare();
 
-              System.out.println(">>>>>>"+Looper.myLooper().hashCode());
+//              System.out.println(">>>>>>"+Looper.myLooper().hashCode());
                 int i=0;
-                while(i<100){
+                while(i<10){
                     Message msg = Message.obtain();
                     msg.obj = "this is message "+i;
                     mChildHandler.sendMessage(msg );
                     i++;
 
                     try {
-                        Thread.sleep(2000);
+                        Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
 
-                Looper.loop();
+//                Looper.loop();
             }
         });
 
       t.start();
 
-        show();
+
     }
 
 
     private void show(){
         new Thread(new Runnable() {
+            Handler h;
+
             @Override
             public void run() {
-                Looper.prepare();
-                Dialog dialog = null;
-                AlertDialog.Builder   builder     = new AlertDialog.Builder(CoordinatLayout1Activity.this);
-                dialog = builder.create();
-                LinearLayout linearLayout = new LinearLayout(CoordinatLayout1Activity.this);
 
-                TextView textView = new TextView(CoordinatLayout1Activity.this);
-                textView.setText("打了十几个垃圾山东理工快结束了干净利索塑料管技术");
-//              LinearLayout.LayoutParams  params = new LinearLayout.LayoutParams(CoordinatLayout1Activity.this,null);
-//                params.setMargins(100,100,100,100);
-//                textView.setLayoutParams(params);
+                    Looper.prepare();
+
+                     h = new Handler(){
+                        @Override
+                        public void handleMessage(@NonNull Message msg) {
+                            super.handleMessage(msg);
+
+                            Log.e(Thread.currentThread().getName(),msg.obj.toString());
+                        }
+                    };
+                    Dialog dialog = null;
+                    AlertDialog.Builder   builder     = new AlertDialog.Builder(CoordinatLayout1Activity.this);
+                    dialog = builder.create();
+                    LinearLayout linearLayout = new LinearLayout(CoordinatLayout1Activity.this);
+
+                    TextView textView = new TextView(CoordinatLayout1Activity.this);
+                    textView.setText("打了十几个垃圾山东理工快结束了干净利索塑料管技术");
 
 
-                 linearLayout.addView(textView);
-                dialog.setContentView(linearLayout);
+                    linearLayout.addView(textView);
+                    dialog.setContentView(linearLayout);
 
-                dialog.show();
+                    dialog.show();
 
-                Toast.makeText(CoordinatLayout1Activity.this,"this is childThread",Toast.LENGTH_LONG).show();
-                Looper.loop();
+                    Toast.makeText(CoordinatLayout1Activity.this,"this is childThread",Toast.LENGTH_LONG).show();
+
+                    int i =0;
+
+                    while (i<100) {
+                        Message msg = Message.obtain();
+                        msg.obj = "only child Thread "+i;
+                        h.sendMessageDelayed(msg,500);
+                        i++;
+
+
+                    }
+                    Looper.loop();
+
             }
         }).start();
     }
