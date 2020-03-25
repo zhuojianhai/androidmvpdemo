@@ -28,4 +28,12 @@
 
     </Button>
 
+    <Button
+        android:text="Retrofit demo"
+        android:id="@+id/bt_retrofit"
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+
+    </Button>
+
 </LinearLayout>

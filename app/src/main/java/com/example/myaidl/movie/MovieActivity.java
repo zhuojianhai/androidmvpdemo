@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.example.myaidl.R;
+
 public class MovieActivity extends AppCompatActivity {
 
     @Override
