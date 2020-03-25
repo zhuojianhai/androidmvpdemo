@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <LinearLayout
+        android:id="@+id/mylinearlayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_bind_service"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="绑定服务端服务">
+
+        </Button>
+
+        <Button
+            android:id="@+id/btn_add_book"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="往服务端增加数据"/>
+
+        <Button
+            android:id="@+id/btn_get_book"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="从服务端获取数据"></Button>
+        <com.example.myapplication.CustomMoveView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:exampleColor="#33b5e5"
+            app:exampleDimension="24sp"
+            app:exampleDrawable="@android:drawable/ic_menu_add"
+            app:exampleString="Hello, CustomMoveView"
+            >
+
+        </com.example.myapplication.CustomMoveView>
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </TextView>
+
+
+
+    </LinearLayout>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@android:drawable/ic_dialog_email" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
