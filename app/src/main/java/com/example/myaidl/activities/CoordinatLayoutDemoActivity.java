@@ -7,6 +7,8 @@ import android.view.View;
 
 import com.example.myaidl.R;
 
+import retrofit2.Retrofit;
+
 public class CoordinatLayoutDemoActivity extends AppCompatActivity {
 
     @Override
@@ -15,5 +17,7 @@ public class CoordinatLayoutDemoActivity extends AppCompatActivity {
         View view  = getWindow().getDecorView();
 
         setContentView(R.layout.activity_coordinat_layout_demo);
+
+
     }
 }

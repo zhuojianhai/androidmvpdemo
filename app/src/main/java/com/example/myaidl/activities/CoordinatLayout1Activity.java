@@ -2,15 +2,20 @@ package com.example.myaidl.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -23,18 +28,50 @@ import org.w3c.dom.Text;
 public class CoordinatLayout1Activity extends AppCompatActivity {
 
     private TextView tv;
+    private TextView tv_child;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coordinat_layout1);
         tv = findViewById(R.id.tv_msg);
-        showChildMessageQueue();
+        tv_child = findViewById(R.id.tv_child);
+
+        RecyclerView recyclerView = new RecyclerView(this);
+
+
+
+        //子线程可以更新ui组件哦
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(5000);
+                    String threnam = Thread.currentThread().getName();
+                    tv_child.setText(threnam+ "-----哈里斯道格拉斯结果到了该结束了大概就是了商量过了建设管理局\n 帝国理工就算了");
+                    tv_child.requestLayout();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }).start();
+
+        //showChildMessageQueue();
 
         tv.append("Thread.currentThread().getName() " +Thread.currentThread().getName()+"\n");
 
         System.out.println(">>>>>>"+Looper.getMainLooper().hashCode());
 
-        show();
+       // show();
+    }
+
+    private void showSpannableString(){
+        SpannableString spannableString = new SpannableString("连手机格拉斯哥十来个");
+        //设置前景色
+        spannableString.setSpan(new ForegroundColorSpan(Color.BLUE),1,2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+
     }
 
 

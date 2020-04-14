@@ -30,6 +30,14 @@ import com.example.myaidl.ui.main.SectionsPagerAdapter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Function;
+import io.reactivex.functions.Predicate;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     EditText num_et2;
 
@@ -124,5 +132,52 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
 
         }
+    }
+
+
+    private void showRXjavademo(){
+        final Disposable[] mDisposable = new Disposable[1];
+        Observable<String> observable = Observable.create(new ObservableOnSubscribe<String>() {
+            @Override
+            public void subscribe(ObservableEmitter<String> emitter) throws Exception {
+
+            }
+        });
+        observable = observable.map(new Function<String, String>() {
+            @Override
+            public String apply(String s) throws Exception {
+                return s.toUpperCase();
+            }
+        }).filter(new Predicate<String>() {
+            @Override
+            public boolean test(String s) throws Exception {
+                return !s.isEmpty();
+            }
+        });
+
+        Observer<String> observer = new Observer<String>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                mDisposable[0] = d;
+            }
+
+            @Override
+            public void onNext(String s) {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
+
+        observable.subscribe(observer);
+
     }
 }

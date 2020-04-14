@@ -1,4 +1,5 @@
 package com.zjh.javademo.pattern.factorymethod;
 
-public class ProductInterface {
+public interface ProductInterface {
+    String productName();
 }
