@@ -1,4 +1,6 @@
 package com.zjh.javademo.datastructor;
 
-public class MyList {
+import java.util.ArrayList;
+
+public class MyList extends ArrayList {
 }

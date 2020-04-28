@@ -1,14 +1,17 @@
 package com.example.myaidl;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.bumptech.glide.Glide;
 import com.example.myaidl.activities.CoordinatLayout1Activity;
 import com.example.myaidl.activities.CoordinatLayout2Activity;
 import com.example.myaidl.activities.CoordinatLayout3Activity;
 import com.example.myaidl.activities.CoordinatLayout4Activity;
 import com.example.myaidl.activities.CoordinatLayout5Activity;
 import com.example.myaidl.activities.CoordinatLayoutDemoActivity;
+import com.example.myaidl.bean.Book;
 import com.example.myaidl.login.LoginActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -24,9 +27,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.example.myaidl.ui.main.SectionsPagerAdapter;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -60,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initDataAndView(FloatingActionButton fab) {
-        num_et2  = findViewById(R.id.et);
+        num_et2 = findViewById(R.id.et);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,12 +79,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-         button1 = findViewById(R.id.bt1);
-         button2 = findViewById(R.id.bt2);
-         button3 = findViewById(R.id.bt3);
-         button4 = findViewById(R.id.bt4);
-         button5 = findViewById(R.id.bt5);
-         button6 = findViewById(R.id.bt6);
+        button1 = findViewById(R.id.bt1);
+        button2 = findViewById(R.id.bt2);
+        button3 = findViewById(R.id.bt3);
+        button4 = findViewById(R.id.bt4);
+        button5 = findViewById(R.id.bt5);
+        button6 = findViewById(R.id.bt6);
 
 
         button1.setOnClickListener(this);
@@ -87,47 +95,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         button6.setOnClickListener(this);
 
         final String pattern = "[^\\d+\\.?\\d{0,2}]";
-        num_et2.addTextChangedListener(new TextWatcher()
-        {
-            public void afterTextChanged(Editable edt)
-            {
+        num_et2.addTextChangedListener(new TextWatcher() {
+            public void afterTextChanged(Editable edt) {
                 String temp = edt.toString();
-                if(Pattern.matches(pattern,temp)){
+                if (Pattern.matches(pattern, temp)) {
                     int posDot = temp.indexOf(".");
                     if (posDot <= 0) return;
-                    if (temp.length() - posDot - 1 > 2)
-                    {
+                    if (temp.length() - posDot - 1 > 2) {
                         edt.delete(posDot + 3, posDot + 4);
                     }
                 }
 
             }
 
-            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {}
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+            }
 
-            public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {}
+            public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+            }
         });
     }
 
     @Override
     public void onClick(View v) {
-        if(v==button1){
+        if (v == button1) {
             Intent intent = new Intent(MainActivity.this, CoordinatLayout1Activity.class);
             startActivity(intent);
-        }else if(v==button2){
+        } else if (v == button2) {
             Intent intent = new Intent(MainActivity.this, CoordinatLayout2Activity.class);
             startActivity(intent);
-        } else if(v==button3){
+        } else if (v == button3) {
             Intent intent = new Intent(MainActivity.this, CoordinatLayout3Activity.class);
             startActivity(intent);
-        }else if(v==button4){
+        } else if (v == button4) {
             Intent intent = new Intent(MainActivity.this, CoordinatLayout4Activity.class);
             startActivity(intent);
-        }else if(v==button5){
+        } else if (v == button5) {
             Intent intent = new Intent(MainActivity.this, CoordinatLayout5Activity.class);
             startActivity(intent);
 
-        }else if(v==button6){
+        } else if (v == button6) {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
 
@@ -135,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    private void showRXjavademo(){
+    private void showRXjavademo() {
         final Disposable[] mDisposable = new Disposable[1];
         Observable<String> observable = Observable.create(new ObservableOnSubscribe<String>() {
             @Override
@@ -179,5 +186,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         observable.subscribe(observer);
 
+
+        Gson gson = new Gson();
+        gson.fromJson("", Book.class);
+
+        Type list = new TypeToken<List<String>>() {
+        }.getType();
+
+    }
+
+    private void showImage() {
+        @SuppressLint("ResourceType") int resId = getResources().getInteger(R.drawable.ic_launcher_background);
+        Glide.with(this).fromResource().into(new ImageView(this));
     }
 }

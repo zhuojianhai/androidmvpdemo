@@ -1,4 +1,10 @@
 package com.zjh.javademo.pattern.decorepattern;
 
-public class Manager implements Person {
+public abstract  class Manager implements Person {
+    protected Person person;
+
+    @Override
+    public void doSomething() {
+        person.doSomething();
+    }
 }
