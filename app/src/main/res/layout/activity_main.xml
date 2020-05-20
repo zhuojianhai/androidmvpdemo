@@ -1,71 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
-    <EditText
-        android:id="@+id/et"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:inputType="numberDecimal"
-        android:hint="请输入金额"
-        >
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    </EditText>
-    <Button
-        android:id="@+id/bt1"
-        android:text="app：layout_scrollFlags=scroll|exitUntilCollapsed"
-        android:layout_width="match_parent"
-        android:layout_height="60dp">
 
-    </Button>
-    <Button
-        android:id="@+id/bt2"
-        android:text="app：layout_scrollFlags=scroll|enterAlways"
-        android:layout_width="match_parent"
-        android:layout_height="60dp">
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            app:srcCompat="@android:drawable/ic_dialog_email" />
 
-    </Button>
+        <EditText
+            android:id="@+id/et"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:hint="请输入金额"
+            android:inputType="numberDecimal">
 
-    <Button
-        android:id="@+id/bt3"
-        android:text="app：layout_scrollFlags=scroll|snap"
-        android:layout_width="match_parent"
-        android:layout_height="60dp">
+        </EditText>
 
-    </Button>
-    <Button
-        android:id="@+id/bt4"
-        android:text="app：layout_scrollFlags=scroll|enterAlways|enterAlwaysCollapsed"
-        android:layout_width="match_parent"
-        android:layout_height="60dp">
+        <Button
+            android:id="@+id/bt1"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="app：layout_scrollFlags=scroll|exitUntilCollapsed">
 
-    </Button>
+        </Button>
 
-    <Button
-        android:id="@+id/bt5"
-        android:text="collapseLayout"
-        android:layout_width="match_parent"
-        android:layout_height="60dp">
+        <Button
+            android:id="@+id/bt2"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="app：layout_scrollFlags=scroll|enterAlways">
 
-    </Button>
-    <Button
-        android:id="@+id/bt6"
-        android:text="mvp demo"
-        android:layout_width="match_parent"
-        android:layout_height="60dp">
+        </Button>
 
-    </Button>
-</LinearLayout>
+        <Button
+            android:id="@+id/bt3"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="app：layout_scrollFlags=scroll|snap">
+
+        </Button>
+
+        <Button
+            android:id="@+id/bt4"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="app：layout_scrollFlags=scroll|enterAlways|enterAlwaysCollapsed">
+
+        </Button>
+
+        <Button
+            android:id="@+id/bt5"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="collapseLayout">
+
+        </Button>
+
+        <Button
+            android:id="@+id/bt6"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="mvp demo">
+
+        </Button>
+
+        <Button
+            android:id="@+id/bt7"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="自定义view">
+
+        </Button>
+
+        <Button
+            android:id="@+id/bt8"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="自定义Layout">
+
+        </Button>
+    </LinearLayout>
+
+</ScrollView>

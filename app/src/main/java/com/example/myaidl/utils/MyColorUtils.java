@@ -1,7 +1,9 @@
 package com.example.myaidl.utils;
 
 
+import android.content.Context;
 import android.graphics.Color;
+import android.util.DisplayMetrics;
 
 import androidx.core.graphics.ColorUtils;
 
@@ -11,4 +13,6 @@ public class MyColorUtils {
         int blendCorlor = ColorUtils.blendARGB(color, color1, ratio);
         return  blendCorlor;
     }
+
+
 }

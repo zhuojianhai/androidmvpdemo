@@ -2,21 +2,30 @@ package com.example.myaidl;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
 import com.example.myaidl.activities.CoordinatLayout1Activity;
 import com.example.myaidl.activities.CoordinatLayout2Activity;
 import com.example.myaidl.activities.CoordinatLayout3Activity;
 import com.example.myaidl.activities.CoordinatLayout4Activity;
 import com.example.myaidl.activities.CoordinatLayout5Activity;
 import com.example.myaidl.activities.CoordinatLayoutDemoActivity;
+import com.example.myaidl.activities.CustomerLayoutActivity;
+import com.example.myaidl.activities.CustomerViewActivity;
 import com.example.myaidl.bean.Book;
 import com.example.myaidl.login.LoginActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
+import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -55,6 +64,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button button4;
     Button button5;
     Button button6;
+    Button button7;
+    Button button8;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +96,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         button4 = findViewById(R.id.bt4);
         button5 = findViewById(R.id.bt5);
         button6 = findViewById(R.id.bt6);
+        button7 = findViewById(R.id.bt7);
+        button8 = findViewById(R.id.bt8);
 
 
         button1.setOnClickListener(this);
@@ -93,6 +106,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         button4.setOnClickListener(this);
         button5.setOnClickListener(this);
         button6.setOnClickListener(this);
+        button7.setOnClickListener(this);
+        button8.setOnClickListener(this);
 
         final String pattern = "[^\\d+\\.?\\d{0,2}]";
         num_et2.addTextChangedListener(new TextWatcher() {
@@ -136,6 +151,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         } else if (v == button6) {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+
+        }else if (v == button7) {
+            Intent intent = new Intent(MainActivity.this, CustomerViewActivity.class);
+            startActivity(intent);
+
+        }else if (v == button8) {
+            Intent intent = new Intent(MainActivity.this, CustomerLayoutActivity.class);
             startActivity(intent);
 
         }
@@ -196,7 +219,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void showImage() {
-        @SuppressLint("ResourceType") int resId = getResources().getInteger(R.drawable.ic_launcher_background);
-        Glide.with(this).fromResource().into(new ImageView(this));
+
+        ImageView img = new ImageView(this);
+        Glide.with(this).load("").placeholder(R.drawable.ic_launcher_background).fitCenter().into(img);
+
+
+        Glide.with(this).load("").listener(new RequestListener<Drawable>() {
+            @Override
+            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                return false;
+            }
+
+            @Override
+            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                return false;
+            }
+        }).into(img);
+
+
+        Glide.get(this).clearMemory();//清理内存缓存 可以在UI主线程中进行
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Glide.get(MainActivity.this).clearDiskCache();//清理磁盘缓存 需要在子线程中执行
+            }
+        }).start();
+
+        Glide.with(this).applyDefaultRequestOptions(new RequestOptions());
     }
 }

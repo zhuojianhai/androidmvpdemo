@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.example.myaidl.custom.BookView
+            android:id="@+id/bookview"
+            android:layout_width="match_parent"
+            android:layout_height="300dp">
+
+        </com.example.myaidl.custom.BookView>
+
+        <com.example.myaidl.custom.PorterDuffXfermodeViews
+            android:layout_width="match_parent"
+            android:layout_height="300dp">
+
+        </com.example.myaidl.custom.PorterDuffXfermodeViews>
+        <com.example.myaidl.custom.PorterDuffXfermodeViews1
+            android:layout_width="match_parent"
+            android:layout_height="300dp">
+
+        </com.example.myaidl.custom.PorterDuffXfermodeViews1>
+
+    </LinearLayout>
+
+</ScrollView>
