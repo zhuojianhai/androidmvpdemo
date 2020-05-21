@@ -93,6 +93,20 @@
             android:text="自定义Layout">
 
         </Button>
+        <Button
+            android:id="@+id/bt9"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="自定义TouchEvent">
+
+        </Button>
+        <Button
+            android:id="@+id/bt10"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="自定义ScableImageView">
+
+        </Button>
     </LinearLayout>
 
 </ScrollView>

@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.CustomerLayoutActivity"></activity>
+        <activity android:name=".activities.ScableImageViewActivity"></activity>
+        <activity android:name=".activities.TouchViewActivity" />
+        <activity android:name=".activities.CustomerLayoutActivity" />
         <activity android:name=".activities.CustomerViewActivity" />
         <activity android:name=".movie.MovieActivity" />
         <activity android:name=".login.LoginActivity" />

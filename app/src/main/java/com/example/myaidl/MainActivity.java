@@ -19,6 +19,8 @@ import com.example.myaidl.activities.CoordinatLayout5Activity;
 import com.example.myaidl.activities.CoordinatLayoutDemoActivity;
 import com.example.myaidl.activities.CustomerLayoutActivity;
 import com.example.myaidl.activities.CustomerViewActivity;
+import com.example.myaidl.activities.ScableImageViewActivity;
+import com.example.myaidl.activities.TouchViewActivity;
 import com.example.myaidl.bean.Book;
 import com.example.myaidl.login.LoginActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -66,6 +68,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button button6;
     Button button7;
     Button button8;
+    Button button9;
+    Button button10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +102,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         button6 = findViewById(R.id.bt6);
         button7 = findViewById(R.id.bt7);
         button8 = findViewById(R.id.bt8);
+        button9 = findViewById(R.id.bt9);
+        button10 = findViewById(R.id.bt10);
 
 
         button1.setOnClickListener(this);
@@ -108,6 +114,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         button6.setOnClickListener(this);
         button7.setOnClickListener(this);
         button8.setOnClickListener(this);
+        button9.setOnClickListener(this);
+        button10.setOnClickListener(this);
 
         final String pattern = "[^\\d+\\.?\\d{0,2}]";
         num_et2.addTextChangedListener(new TextWatcher() {
@@ -159,6 +167,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }else if (v == button8) {
             Intent intent = new Intent(MainActivity.this, CustomerLayoutActivity.class);
+            startActivity(intent);
+
+        }else if (v == button9) {
+            Intent intent = new Intent(MainActivity.this, TouchViewActivity.class);
+            startActivity(intent);
+
+        }else if (v == button10) {
+            Intent intent = new Intent(MainActivity.this, ScableImageViewActivity.class);
             startActivity(intent);
 
         }
