@@ -9,14 +9,13 @@ import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.OverScroller;
 
 import androidx.annotation.Nullable;
 import androidx.core.view.GestureDetectorCompat;
 
 import com.example.myaidl.utils.Utils;
 
-public class ScableImageView extends View implements GestureDetector.OnGestureListener, GestureDetector.OnDoubleTapListener {
+public class ScableImageView3 extends View implements GestureDetector.OnGestureListener, GestureDetector.OnDoubleTapListener {
     private static final float IMAGE_WIDTH = Utils.dpToPixel(300);
     private static final float OVER_SCALE_FACTOR = 1.5f;// 放大之后在额外放大1.5倍
     Bitmap bitmap;
@@ -32,35 +31,15 @@ public class ScableImageView extends View implements GestureDetector.OnGestureLi
     float bigScale;
     /**
      * 这个变量有两个作用
-     * 1、绘制控制大小
-     * 2、双击控制大小
+     *  1、绘制控制大小
+     *  2、双击控制大小
      */
     boolean big;
 
     /**
      * 这个属性的增加，控制绘制的大小。解耦big的功能
      */
-    float scaleFraction;//0~1 动画属性
-
-    ObjectAnimator objectAnimator;
-
-    GestureDetectorCompat gestureDetectorCompat;
-
-    OverScroller scroller;
-
-
-    public ScableImageView(Context context) {
-        super(context);
-    }
-
-    public ScableImageView(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-        bitmap = Utils.getAvatar(getResources(), (int) IMAGE_WIDTH);
-        gestureDetectorCompat = new GestureDetectorCompat(context, this);
-
-        gestureDetectorCompat.setOnDoubleTapListener(this);
-    }
-
+    float  scaleFraction ;//0~1 动画属性
 
     public float getScaleFraction() {
         return scaleFraction;
@@ -71,13 +50,32 @@ public class ScableImageView extends View implements GestureDetector.OnGestureLi
         invalidate();
     }
 
-    private ObjectAnimator getScaleAnimator() {
-        if (objectAnimator == null) {
-            objectAnimator = ObjectAnimator.ofFloat(this, "scaleFraction", 0, 1);
-        }
-        return objectAnimator;
+
+
+
+    ObjectAnimator objectAnimator;
+
+    GestureDetectorCompat gestureDetectorCompat;
+
+    public ScableImageView3(Context context) {
+        super(context);
     }
 
+    public ScableImageView3(Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
+        bitmap = Utils.getAvatar(getResources(),(int)IMAGE_WIDTH);
+        gestureDetectorCompat = new GestureDetectorCompat(context,this);
+
+        gestureDetectorCompat.setOnDoubleTapListener(this);
+    }
+
+
+    private ObjectAnimator getScaleAnimator(){
+        if(objectAnimator == null){
+            objectAnimator = ObjectAnimator.ofFloat(this,"scaleFraction",0,1);
+        }
+        return  objectAnimator;
+    }
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         return gestureDetectorCompat.onTouchEvent(event);
@@ -86,16 +84,16 @@ public class ScableImageView extends View implements GestureDetector.OnGestureLi
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        originalOffsetX = (float) ((getWidth() - bitmap.getWidth()) / 2);
-        originalOffsetY = (float) ((getHeight() - bitmap.getHeight()) / 2);
+        originalOffsetX =(float)( (getWidth() - bitmap.getWidth())/2);
+        originalOffsetY =(float) ((getHeight() - bitmap.getHeight())/2);
 
         //图片的宽高比，比view的宽高比大
-        if ((float) bitmap.getWidth() / bitmap.getHeight() > (float) getWidth() / getHeight()) {
-            smallScale = (float) getWidth() / bitmap.getWidth();
-            bigScale = (float) getHeight() / bitmap.getHeight() * OVER_SCALE_FACTOR;
-        } else {
-            smallScale = (float) getHeight() / bitmap.getHeight();
-            bigScale = (float) getWidth() / bitmap.getWidth() * OVER_SCALE_FACTOR;
+        if((float)bitmap.getWidth()/bitmap.getHeight() > (float)getWidth()/getHeight()){
+            smallScale = (float)getWidth()/bitmap.getWidth();
+            bigScale = (float)getHeight()/bitmap.getHeight()*OVER_SCALE_FACTOR;
+        }else{
+            smallScale = (float)getHeight()/bitmap.getHeight(); 
+            bigScale = (float)getWidth() / bitmap.getWidth()*OVER_SCALE_FACTOR;
         }
 
     }
@@ -104,11 +102,11 @@ public class ScableImageView extends View implements GestureDetector.OnGestureLi
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        canvas.translate(offsetX, offsetY);
-        float sacle = smallScale + (bigScale - smallScale) * scaleFraction;
-        System.out.println("scale " + sacle);
-        canvas.scale(sacle, sacle, getWidth() / 2f, getHeight() / 2f);
-        canvas.drawBitmap(bitmap, originalOffsetX, originalOffsetY, paint);
+        canvas.translate(offsetX,offsetY);
+        float sacle = smallScale+(bigScale-smallScale)*scaleFraction;
+        System.out.println("scale " +sacle);
+        canvas.scale(sacle,sacle,getWidth()/2f,getHeight()/2f);
+        canvas.drawBitmap(bitmap,originalOffsetX,originalOffsetY,paint);
     }
 
     @Override
@@ -128,8 +126,7 @@ public class ScableImageView extends View implements GestureDetector.OnGestureLi
     }
 
     /**
-     * 其实就是onMove 事件
-     *
+     * 其实就是onMove 事假
      * @param e1
      * @param e2
      * @param distanceX
@@ -138,28 +135,12 @@ public class ScableImageView extends View implements GestureDetector.OnGestureLi
      */
     @Override
     public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-        if (big) {
-            offsetX -= distanceX;
-            offsetY -= distanceY;
-            fixOffsets();
+        if (big){
+            offsetX-=distanceX;
+            offsetY-=distanceY;
             invalidate();
         }
         return false;
-    }
-
-    /**
-     * 限制图片拖动边缘
-     */
-    private void fixOffsets() {
-        //最左边位置
-        offsetX = Math.min(offsetX, (bitmap.getWidth() * bigScale - getWidth()) / 2);
-        //最右边位置
-        offsetX = Math.max(offsetX, -(bitmap.getWidth() * bigScale - getWidth()) / 2);
-
-        //最上边位置
-        offsetY = Math.min(offsetY, (bitmap.getHeight() * bigScale - getHeight()) / 2);
-        //最底部位置
-        offsetY = Math.max(offsetY, -(bitmap.getHeight() * bigScale - getHeight()) / 2);
     }
 
     // 600毫秒  原生的是500毫秒
@@ -187,9 +168,9 @@ public class ScableImageView extends View implements GestureDetector.OnGestureLi
     @Override
     public boolean onDoubleTap(MotionEvent e) {
         big = !big;
-        if (big) {
+        if(big){
             getScaleAnimator().start();
-        } else {
+        }else{
             getScaleAnimator().reverse();
         }
 
