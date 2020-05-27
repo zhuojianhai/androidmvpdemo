@@ -5,9 +5,11 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxjava:2.1.14'
 
     implementation 'com.squareup.okio:okio:1.9.0'
+    api 'com.google.dagger:dagger:2.26'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.26'
 }
 
-sourceCompatibility = "7"
-targetCompatibility = "7"
+sourceCompatibility = "8"
+targetCompatibility = "8"
 
 

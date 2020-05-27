@@ -28,6 +28,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -79,6 +80,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         FloatingActionButton fab = findViewById(R.id.fab);
 
         initDataAndView(fab);
+
+        RecyclerView recyclerView = new RecyclerView(this);
 
     }
 

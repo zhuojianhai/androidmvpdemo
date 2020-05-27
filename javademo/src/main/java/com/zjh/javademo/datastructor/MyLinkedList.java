@@ -160,10 +160,10 @@ public class MyLinkedList<E> {
         linkedList.add("world");
         linkedList.add("demo");
         System.out.println(linkedList.getSize());
-        System.out.println(linkedList.get(0));
+//        System.out.println(linkedList.get(0));
         linkedList.add(1,"world");
 
-        System.out.println(linkedList.get(1));
+//        System.out.println(linkedList.get(1));
 
         linkedList.remove(1);
         System.out.println(linkedList.size);

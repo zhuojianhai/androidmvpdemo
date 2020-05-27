@@ -17,9 +17,9 @@ public class TestReflect {
         try {
             Class<ReflectClassDemo> clazz = (Class<ReflectClassDemo>) Class.forName("com.zjh.javademo.reflect.ReflectClassDemo");
 
-//            ReflectClassDemo RCInstance =  clazz.newInstance();
-           Constructor constructor =  clazz.getDeclaredConstructor(null);
-            ReflectClassDemo RCInstance = (ReflectClassDemo) constructor.newInstance(null);
+            ReflectClassDemo RCInstance =  clazz.newInstance();
+//           Constructor constructor =  clazz.getDeclaredConstructor(null);
+//            ReflectClassDemo RCInstance = (ReflectClassDemo) constructor.newInstance(null);
 
             Field fields[] = clazz.getDeclaredFields();
 
