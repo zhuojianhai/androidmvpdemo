@@ -36,4 +36,14 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+
+
+    implementation 'com.google.dagger:dagger-android:2.15'
+// 如果使用了 Android support libraries 中的相关组件，则需要添加该依赖
+    implementation 'com.google.dagger:dagger-android-support:2.15'
+    annotationProcessor 'com.google.dagger:dagger-android-processor:2.15'
+// Dagger 2 的编译时注解处理器（必须）
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.19'
+
+
 }
