@@ -4,7 +4,7 @@ import javax.inject.Inject;
 
 public class Test {
     public Test(){
-        DaggerCstudyComponent.builder().cstudyModule(new CstudyModule(100)).build().inject(this);
+        DaggerCstudyComponent.builder().cstudyModule(new CstudyModule(100,"zhuojianhai")).build().inject(this);
     }
     @Inject
     Woman woman;

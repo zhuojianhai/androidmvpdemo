@@ -1,12 +1,12 @@
 apply plugin: 'java-library'
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'io.reactivex.rxjava2:rxjava:2.1.14'
-
     implementation 'com.squareup.okio:okio:1.9.0'
     api 'com.google.dagger:dagger:2.26'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.26'
+    implementation files('libs/gson-2.2.4.jar')
 }
 
 sourceCompatibility = "8"

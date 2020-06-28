@@ -19,5 +19,6 @@ public class Woman {
 
     public void show(){
         System.out.println("soul money "+soul.getMomey());
+        System.out.println("soul name "+soul.getName());
     }
 }

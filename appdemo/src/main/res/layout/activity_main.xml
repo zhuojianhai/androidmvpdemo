@@ -32,16 +32,16 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="从服务端获取数据"></Button>
-        <com.example.myapplication.CustomMoveView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            app:exampleColor="#33b5e5"
-            app:exampleDimension="24sp"
-            app:exampleDrawable="@android:drawable/ic_menu_add"
-            app:exampleString="Hello, CustomMoveView"
-            >
+<!--        <com.example.myapplication.CustomMoveView-->
+<!--            android:layout_width="80dp"-->
+<!--            android:layout_height="80dp"-->
+<!--            app:exampleColor="#33b5e5"-->
+<!--            app:exampleDimension="24sp"-->
+<!--            app:exampleDrawable="@android:drawable/ic_menu_add"-->
+<!--            app:exampleString="Hello, CustomMoveView"-->
+<!--            >-->
 
-        </com.example.myapplication.CustomMoveView>
+<!--        </com.example.myapplication.CustomMoveView>-->
         <TextView
             android:id="@+id/tv_content"
             android:layout_width="match_parent"

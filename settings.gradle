@@ -1,2 +1,2 @@
-include ':app',':appdemo', ':myphoneapplication', ':dynamicfeature', ':javademo'
+include ':app',':appdemo', ':myphoneapplication', ':javademo'
 rootProject.name='MyAidl'
