@@ -9,7 +9,12 @@ public class UserRequest {
         IRequest iRequest = new RequestImpl();
         IRequestInvocationHandler iRequestInvocationHandler = new IRequestInvocationHandler();
         IRequest proxyObject = (IRequest) iRequestInvocationHandler.getProxyInstance(iRequest);
-        proxyObject.request("say hello to the world");
 
+        IRequest proxyObject1  = (IRequest) iRequestInvocationHandler.getProxyInstancebyClass(RequestImpl.class);
+        proxyObject.request("say hello to the world");
+        proxyObject1.request("say hello to the world ..........");
+
+
+        Class clazz = RequestImpl.class;
     }
 }

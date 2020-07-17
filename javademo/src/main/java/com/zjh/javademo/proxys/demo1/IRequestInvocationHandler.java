@@ -26,6 +26,18 @@ public class IRequestInvocationHandler implements InvocationHandler {
         }
        return Proxy.newProxyInstance(target.getClass().getClassLoader(),target.getClass().getInterfaces(),this);
     }
+
+    public Object getProxyInstancebyClass(Class target){
+        try {
+            this.target = target.newInstance();
+            return Proxy.newProxyInstance(target.getClassLoader(),target.getInterfaces(),this);
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return  null;
+    }
     @Override
     public Object invoke(Object o, Method method, Object[] objects) throws Throwable {
         System.out.println("begain invoke method "+method);

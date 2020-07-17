@@ -1,2 +1,4 @@
 include ':app',':appdemo', ':myphoneapplication', ':javademo'
 rootProject.name='MyAidl'
+include ':processor'
+include ':annotation'
