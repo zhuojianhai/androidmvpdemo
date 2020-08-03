@@ -20,5 +20,14 @@ public class TestTreePrintTreeInfo {
 
         BinaryTrees.print(bs);
 
+        System.out.println();
+
+        BinarySearchTreeVistor<Integer> bss = new BinarySearchTreeVistor<>();
+        for (int i=0;i<integer.length;i++){
+            bss.add(integer[i]);
+        }
+
+        bss.preorderTraversal();
+
     }
 }

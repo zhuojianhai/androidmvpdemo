@@ -38,13 +38,35 @@ public class BinarySearchTreeVistor<E> implements BinaryTreeInfo {
         preorderTraversal(root);
     }
 
+    /**
+     * 前序遍历
+     * 递归调用
+     * @param node
+     */
     private void preorderTraversal(Node<E> node){
-
-
-
+        if (node == null) return;
+        System.out.println("当前节点元素值："+node.elment);
+        preorderTraversal(node.left);
+        preorderTraversal(node.right);
     }
 
 
+    public void postorderTraversal(){
+        postorderTraversal(root);
+    }
+
+    /**
+     * 后续遍历
+     * @param root
+     */
+    private void postorderTraversal(Node<E> root){
+
+        if (root == null) return;
+        postorderTraversal(root.left);
+        postorderTraversal(root.right);
+        System.out.println(root.elment);
+
+    }
     public void add(E element){
         //如果是第一次添加元素
         if (root == null){
