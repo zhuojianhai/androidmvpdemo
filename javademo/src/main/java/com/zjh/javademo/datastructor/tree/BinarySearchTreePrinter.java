@@ -1,12 +1,14 @@
 package com.zjh.javademo.datastructor.tree;
 
+import com.zjh.javademo.datastructor.tree.printer.BinaryTreeInfo;
+
 import java.util.Comparator;
 
 /***
  * 二叉搜索树
  * @param <E>
  */
-public class BinarySearchTree<E> {
+public class BinarySearchTreePrinter<E> implements BinaryTreeInfo {
 
     private int size = 0;//大小
     private Node<E> root = null;//树的根节点
@@ -18,11 +20,11 @@ public class BinarySearchTree<E> {
     //jdk 提供的元素比较器接口
     private Comparator comparator;
 
-    public BinarySearchTree(){
+    public BinarySearchTreePrinter(){
         this(null);
     }
 
-    public BinarySearchTree(Comparator<E> comparator){
+    public BinarySearchTreePrinter(Comparator<E> comparator){
         this.comparator = comparator;
     }
     public void add(E element){
@@ -67,7 +69,27 @@ public class BinarySearchTree<E> {
         return ((Comparable)e1).compareTo(e2);
     }
 
-     static class Node<E>{
+    @Override
+    public Object root() {
+        return root;
+    }
+
+    @Override
+    public Object left(Object node) {
+        return ((Node<E>)node).left;
+    }
+
+    @Override
+    public Object right(Object node) {
+        return ((Node<E>)node).right;
+    }
+
+    @Override
+    public Object string(Object node) {
+        return((Node<E>)node).elment;
+    }
+
+    static class Node<E>{
         E elment;
         Node<E> left;
         Node<E> right;
