@@ -3,6 +3,9 @@ package com.zjh.javademo.datastructor.tree;
 import com.zjh.javademo.datastructor.tree.printer.BinaryTreeInfo;
 
 import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.concurrent.LinkedBlockingDeque;
 
 /***
  * 二叉搜索树
@@ -65,6 +68,37 @@ public class BinarySearchTreeVistor<E> implements BinaryTreeInfo {
         postorderTraversal(root.left);
         postorderTraversal(root.right);
         System.out.println(root.elment);
+
+    }
+
+    /**
+     * 层序遍历
+     * 需要借助队列来实现树的层序遍历
+     */
+    public void levelOrderTraversal(){
+        levelOrderTraversal(root);
+    }
+    private void levelOrderTraversal(Node<E> root){
+        if (root == null) return;
+        Queue<Node<E>> queue = new LinkedList<>();
+        //入队
+        queue.offer(root);
+        //队列不为空，不断从队列头取节点
+        while (!queue.isEmpty()){
+            //取头结点
+            Node<E> node = queue.poll();
+
+            System.out.println(node.elment);
+
+            if (node.left!=null){
+                queue.offer(node.left);
+            }
+            if (node.right!=null){
+                queue.offer(node.right);
+            }
+
+        }
+
 
     }
     public void add(E element){

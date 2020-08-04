@@ -11,7 +11,7 @@ public class TestTreePrintTreeInfo {
     public static void main(String[] args) {
 
         Integer integer[] = new Integer[]{
-                1,20,5,12,25,8,7
+               7,4,9,2,5,8,11,1,3,10,12
         };
         BinarySearchTreePrinter<Integer> bs = new BinarySearchTreePrinter<>();
         for (int i=0;i<integer.length;i++){
@@ -28,6 +28,8 @@ public class TestTreePrintTreeInfo {
         }
 
         bss.preorderTraversal();
+
+        bss.levelOrderTraversal();
 
     }
 }
