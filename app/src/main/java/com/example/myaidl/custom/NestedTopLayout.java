@@ -56,10 +56,10 @@ public class NestedTopLayout extends FrameLayout implements NestedScrollingParen
     public void onNestedPreScroll(@NonNull View target, int dx, int dy, @NonNull int[] consumed, int type) {
 
         int mdy = dy;
-        mShowTop = dy<0 && Math.abs(scrollY) <= mTopViewHeight && !target.canScrollVertically(-1);
-
-        if(mShowTop){
-
-        }
+//        mShowTop = dy<0 && Math.abs(scrollY) <= mTopViewHeight && !target.canScrollVertically(-1);
+//
+//        if(mShowTop){
+//
+//        }
     }
 }

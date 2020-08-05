@@ -1,10 +1,11 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-
+//统一依赖库版本。
+apply from: "config.gradle"
 buildscript {
     repositories {
         google()
         jcenter()
-        
+
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.5.2'
@@ -18,7 +19,9 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
+
+        maven { url "https://jitpack.io" }
+
     }
 }
 
@@ -29,13 +32,15 @@ task clean(type: Delete) {
 project.afterEvaluate {
     println("this is project afterEvaluate")
 }
-task hello(){
+task hello() {
     println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-    doFirst{
+    doFirst {
         println("===============this is dofirst====================")
     }
 
-    doLast{
+    doLast {
         println("================this is dolast==================================")
     }
 }
+
+
