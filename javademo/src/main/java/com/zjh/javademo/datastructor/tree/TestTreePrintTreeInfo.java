@@ -31,5 +31,10 @@ public class TestTreePrintTreeInfo {
 
         bss.levelOrderTraversal();
 
+        BinaryTrees.println(bss);
+        System.out.println(">>>>>>>>>>>");
+        bss.revertTree();
+
+        BinaryTrees.println(bss);
     }
 }

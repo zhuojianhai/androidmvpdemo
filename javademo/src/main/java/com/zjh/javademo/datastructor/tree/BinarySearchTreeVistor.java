@@ -74,6 +74,7 @@ public class BinarySearchTreeVistor<E> implements BinaryTreeInfo {
     /**
      * 层序遍历
      * 需要借助队列来实现树的层序遍历
+     * 队是先进先出
      */
     public void levelOrderTraversal(){
         levelOrderTraversal(root);
@@ -100,6 +101,37 @@ public class BinarySearchTreeVistor<E> implements BinaryTreeInfo {
         }
 
 
+    }
+
+    public void revertTree(){
+        revertTree(root);
+    }
+    /**
+     * 二叉树翻转
+     * @param root
+     */
+    public Node<E> revertTree(Node<E> root){
+        if (root == null) return root;
+
+        Queue<Node<E>> queue = new LinkedList<>();
+        queue.offer(root);
+
+        while (!queue.isEmpty()){
+            Node<E> node = queue.poll();
+            Node<E> temp = node.left;
+            node.left = node.right;
+            node.right = temp;
+
+            if (node.left!=null){
+                queue.add(node.left);
+            }
+
+            if (node.right!=null){
+                queue.add(node.right);
+            }
+
+        }
+        return root;
     }
     public void add(E element){
         //如果是第一次添加元素

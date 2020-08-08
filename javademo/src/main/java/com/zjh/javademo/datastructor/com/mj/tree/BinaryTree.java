@@ -84,13 +84,17 @@ public class BinaryTree<E> implements BinaryTreeInfo {
 			}
 		}
 	}
-	
+
+	/**
+	 * 判断是否是完全二叉树
+	 * @return
+	 */
 	public boolean isComplete() {
 		if (root == null) return false;
 		Queue<Node<E>> queue = new LinkedList<>();
 		queue.offer(root);
 		
-		boolean leaf = false;
+		boolean leaf = false;//要求是叶子
 		while (!queue.isEmpty()) {
 			Node<E> node = queue.poll();
 			if (leaf && !node.isLeaf()) return false;
@@ -151,6 +155,11 @@ public class BinaryTree<E> implements BinaryTreeInfo {
 		return 1 + Math.max(height(node.left), height(node.right));
 	}
 
+	/**
+	 * 前驱节点：中序遍历时前一个节点
+	 * @param node
+	 * @return
+	 */
 	protected Node<E> predecessor(Node<E> node) {
 		if (node == null) return null;
 		
@@ -172,7 +181,12 @@ public class BinaryTree<E> implements BinaryTreeInfo {
 		// node == node.parent.right
 		return node.parent;
 	}
-	
+
+	/**
+	 * 后继节点：
+	 * @param node
+	 * @return
+	 */
 	protected Node<E> successor(Node<E> node) {
 		if (node == null) return null;
 		
