@@ -1,9 +1,13 @@
 package com.zjh.javademo;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 public class MyClass {
@@ -27,6 +31,12 @@ public class MyClass {
         System.out.println(age/100);
         System.out.println(age %100/10);
         System.out.println(age %100%10);
+
+
+        TypeToken token = new TypeToken<List<String>>(){
+
+        };
+
 
 
     }

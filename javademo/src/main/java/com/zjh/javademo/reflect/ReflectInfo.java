@@ -1,5 +1,6 @@
 package com.zjh.javademo.reflect;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -12,8 +13,9 @@ import java.util.Map;
  */
 public class ReflectInfo {
 
-    public void testMethod(Map<String,String> map, List<String> list){
+    public <T> Map<String,String> testMethod(Map<String,String> map, List<String> list){
         System.out.println("this is testMethod");
+        return new HashMap<>();
     }
 
     public Map<String,String> testMethod2(){
@@ -26,11 +28,12 @@ public class ReflectInfo {
         Class clazz = ReflectInfo.class;
         try {
             Method testMethod = clazz.getDeclaredMethod("testMethod", Map.class, List.class);
+
+            //参数上对应的注解
+            Annotation[][]  parameterAnnotaions = testMethod.getParameterAnnotations();
+
             //获得方法参数的泛型信息
             Type[] types = testMethod.getGenericParameterTypes();
-            testMethod.getGenericParameterTypes();
-            testMethod.getGenericParameterTypes();
-            testMethod.getGenericParameterTypes();
             for (Type t: types) {
                 System.out.println("#"+t);
                 if(t instanceof ParameterizedType){
@@ -42,6 +45,14 @@ public class ReflectInfo {
                 }
 
             }
+
+          int count =   testMethod.getParameterCount();
+            System.out.println("parameter count is =="+count);
+
+            //获得方法返回值类型
+           Type returenType = testMethod.getGenericReturnType();
+            System.out.println(returenType);
+
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }

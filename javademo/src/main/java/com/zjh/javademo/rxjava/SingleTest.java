@@ -7,6 +7,8 @@ package com.zjh.javademo.rxjava;
 
 import org.reactivestreams.Subscription;
 
+import java.net.URLEncoder;
+
 import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
 import io.reactivex.FlowableEmitter;
@@ -35,7 +37,13 @@ public class SingleTest {
 //        showObservableInfo();
         //showIn();
 
-        showFlowable();
+//        showFlowable();
+
+       String res =  URLEncoder.encode("PDA测试登录");
+        System.out.println("res ---------"+res);
+       String rss = URLEncoder.encode(res);
+        System.out.println("rss----------"+rss);
+
     }
 
 

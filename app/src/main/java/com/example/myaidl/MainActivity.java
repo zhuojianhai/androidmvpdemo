@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
@@ -71,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button button8;
     Button button9;
     Button button10;
+    Button button11;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +109,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         button8 = findViewById(R.id.bt8);
         button9 = findViewById(R.id.bt9);
         button10 = findViewById(R.id.bt10);
+        button11 = findViewById(R.id.bt11);
 
 
         button1.setOnClickListener(this);
@@ -119,6 +122,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         button8.setOnClickListener(this);
         button9.setOnClickListener(this);
         button10.setOnClickListener(this);
+        button11.setOnClickListener(this);
 
         final String pattern = "[^\\d+\\.?\\d{0,2}]";
         num_et2.addTextChangedListener(new TextWatcher() {
@@ -179,6 +183,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }else if (v == button10) {
             Intent intent = new Intent(MainActivity.this, ScableImageViewActivity.class);
             startActivity(intent);
+
+        }else if (v == button11) {
+//            Intent intent = new Intent(MainActivity.this, ScableImageViewActivity.class);
+//            startActivity(intent);
+
+            ARouter.getInstance().build("/com/zjh/module/home/ui/login").navigation();
+
 
         }
     }

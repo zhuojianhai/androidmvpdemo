@@ -1,5 +1,11 @@
 package com.zjh.javademo.rxjava;
 
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -12,6 +18,29 @@ public class ObservableTest {
     private static  String TAG = "ObservableTest";
     public static void main(String[] args) {
         showObservabelInfo();
+//
+//        ObservableTest bt = new ObservableTest();
+//        bt.ss();
+    }
+
+
+    private void ss(){
+        ExecutorService executor = Executors.newScheduledThreadPool(2);
+        Future<String> future = executor.submit(new Callable<String>() {
+            @Override
+            public String call() throws Exception {
+                String result = "conscience";
+                return "success";
+            }
+        });
+
+        try {
+            System.out.println(future.get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void showObservabelInfo(){
@@ -34,8 +63,8 @@ public class ObservableTest {
             }
         });
 
-        observable =  observable.subscribeOn(Schedulers.newThread());
-        observable = observable.observeOn(Schedulers.newThread());
+        observable =  observable.subscribeOn(Schedulers.trampoline());
+        observable = observable.observeOn(Schedulers.trampoline());
 
         Observer<String> observer = new Observer<String>() {
             @Override

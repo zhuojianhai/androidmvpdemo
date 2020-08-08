@@ -1,9 +1,15 @@
 package com.example.myaidl.network;
 
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.ConnectionPool;
+import okhttp3.Dns;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -62,8 +68,11 @@ public class MyOkhttpUtils {
             public Response intercept(Chain chain) throws IOException {
                 return chain.proceed(chain.request());
             }
-        })
+        }).connectionPool(new ConnectionPool(10,10, TimeUnit.MINUTES))
+                .dns(Dns.SYSTEM)
                 .build();
+        okHttpClient.dispatcher().setMaxRequests(100);
+        okHttpClient.dispatcher().setMaxRequestsPerHost(20);
 
 
         RequestBody rb = new RequestBody() {
@@ -74,7 +83,6 @@ public class MyOkhttpUtils {
 
             @Override
             public void writeTo(BufferedSink sink) throws IOException {
-
             }
         };
         Request request = new Request.Builder().post(rb).build();
