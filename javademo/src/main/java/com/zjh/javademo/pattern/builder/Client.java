@@ -9,4 +9,12 @@ package com.zjh.javademo.pattern.builder;
  *          它主要有两个作用，一是：隔离了客户与对象的生产过程；二是：负责控制产品对象的生产过程。
  */
 public class Client {
+    public static void main(String[] args) {
+        HouseDirector director = new HouseDirector();
+        HouseBuilder builder = new CommonHouseBuilder();
+        director.setHouseBuilder(builder);
+
+        House house = director.buildHouse();
+        System.out.println(house.toString());
+    }
 }
