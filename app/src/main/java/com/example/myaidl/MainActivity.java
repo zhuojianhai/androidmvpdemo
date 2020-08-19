@@ -2,6 +2,11 @@ package com.example.myaidl;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.BitmapRegionDecoder;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
@@ -24,19 +29,29 @@ import com.example.myaidl.activities.ScableImageViewActivity;
 import com.example.myaidl.activities.TouchViewActivity;
 import com.example.myaidl.bean.Book;
 import com.example.myaidl.login.LoginActivity;
+import com.example.myaidl.ui.main.PlaceholderFragment;
+import com.example.myaidl.ui.main.PlaceholderFragment2;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Lifecycle;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -46,6 +61,8 @@ import com.example.myaidl.ui.main.SectionsPagerAdapter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -60,6 +77,7 @@ import io.reactivex.functions.Function;
 import io.reactivex.functions.Predicate;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private String TAG = "MainActivity";
     EditText num_et2;
 
     Button button1;
@@ -85,6 +103,70 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         RecyclerView recyclerView = new RecyclerView(this);
 
+        Log.e(TAG, "onCreate: >>>>>>" );
+        if (savedInstanceState!=null){
+            String name = (String) savedInstanceState.get("name");
+            Log.e(TAG, "onCreate: savedInstanceState ----" +name);
+        }
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.add(PlaceholderFragment.newInstance(1),"placeholderFragment");
+//        transaction.add(PlaceholderFragment2.newInstance(2),"placeholderFragment2");
+        transaction.commit();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.e(TAG, "onStart: >>>>>" );
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.e(TAG, "onRestart: >>>>>>>" );
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Log.e(TAG, "onSaveInstanceState: >>>>>>>>>>>>>>" );
+        outState.putCharSequence("name","zhuojianahi");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e(TAG, "onResume:>>>>>> " );
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.e(TAG, "onPause: >>>>>>>>>>>>>" );
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.e(TAG, "onStop: >>>>>>" );
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.e(TAG, "onDestroy: >>>>>>>>>>>>" );
+    }
+
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        StringBuilder sb = new StringBuilder();
+        sb.append(newConfig.orientation);
+        sb.append("\n");
+        Log.e(TAG, "onConfigurationChanged: "+sb.toString() );
     }
 
     private void initDataAndView(FloatingActionButton fab) {
@@ -190,10 +272,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             ARouter.getInstance().build("/com/zjh/module/home/ui/login").navigation();
 
+            FragmentManager f = getSupportFragmentManager();
+            FragmentTransaction ft = f.beginTransaction();
+           Fragment fragment =  f.findFragmentByTag("placeholderFragment");
+           ft.setMaxLifecycle(fragment, Lifecycle.State.DESTROYED);
+
+
+           ViewPager viewPager = new ViewPager(this);
+           viewPager.setAdapter(new MyPagerAdapter());
+
+
+            SurfaceView surfaceView = new SurfaceView(this);
+
 
         }
     }
 
+    class  MyPagerAdapter extends PagerAdapter{
+
+        @Override
+        public int getCount() {
+            return 0;
+        }
+
+        @Override
+        public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
+            return false;
+        }
+    }
 
     private void showRXjavademo() {
         final Disposable[] mDisposable = new Disposable[1];
@@ -277,5 +383,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }).start();
 
         Glide.with(this).applyDefaultRequestOptions(new RequestOptions());
+    }
+
+    @SuppressLint("ResourceType")
+    private void showBitmap(){
+        InputStream inputStream = null;
+        BitmapRegionDecoder decoder = null;
+        try {
+            inputStream = getResources().openRawResource(R.drawable.avatar_rengwuxian);
+            decoder  = BitmapRegionDecoder.newInstance(inputStream,false);
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inMutable = true;
+            options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+
+            Rect rect = new Rect();
+            rect.left = 0;
+            rect.top = 0;
+            rect.right = 100;
+            rect.bottom = 100;
+
+            decoder.decodeRegion(rect,options);
+
+        }catch (Exception e){
+            e.printStackTrace();
+
+        }finally {
+            if (inputStream!=null){
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
     }
 }

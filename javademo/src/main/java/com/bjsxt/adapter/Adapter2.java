@@ -7,7 +7,7 @@ package com.bjsxt.adapter;
  *
  */
 public class Adapter2  implements Target {
-	
+	//被适配者
 	private Adaptee adaptee;
 	
 	@Override

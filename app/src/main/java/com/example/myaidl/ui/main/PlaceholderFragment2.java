@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -21,14 +21,14 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class PlaceholderFragment extends Fragment {
+public class PlaceholderFragment2 extends Fragment {
 
     private static final String ARG_SECTION_NUMBER = "section_number";
 
     private PageViewModel pageViewModel;
 
-    public static PlaceholderFragment newInstance(int index) {
-        PlaceholderFragment fragment = new PlaceholderFragment();
+    public static PlaceholderFragment2 newInstance(int index) {
+        PlaceholderFragment2 fragment = new PlaceholderFragment2();
         Bundle bundle = new Bundle();
         bundle.putInt(ARG_SECTION_NUMBER, index);
         fragment.setArguments(bundle);
@@ -38,13 +38,13 @@ public class PlaceholderFragment extends Fragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        Log.e(TAG, "PlaceholderFragment setUserVisibleHint: " +isVisibleToUser );
+        Log.e(TAG, "PlaceholderFragment2 setUserVisibleHint: "  +isVisibleToUser );
     }
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        Log.e(TAG, "PlaceholderFragment onAttach: " );
+        Log.e(TAG, "PlaceholderFragment2 onAttach: " );
     }
 
     @Override
@@ -57,7 +57,7 @@ public class PlaceholderFragment extends Fragment {
         }
         pageViewModel.setIndex(index);
 
-        Log.e(TAG, "PlaceholderFragment onCreate: " );
+        Log.e(TAG, "PlaceholderFragment2 onCreate: " );
     }
 
     @Override
@@ -72,67 +72,67 @@ public class PlaceholderFragment extends Fragment {
                 textView.setText(s);
             }
         });
-        Log.e(TAG, "PlaceholderFragment onCreateView: " );
+        Log.e(TAG, "PlaceholderFragment2 onCreateView: " );
         return root;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Log.e(TAG, "PlaceholderFragment onViewCreated: " );
+        Log.e(TAG, "PlaceholderFragment2 onViewCreated: " );
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Log.e(TAG, "PlaceholderFragment onActivityCreated: >>>>>>>" );
+        Log.e(TAG, "PlaceholderFragment2 onActivityCreated: >>>>>>>" );
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        Log.e(TAG, "PlaceholderFragment onStart: >>>>>>>" );
+        Log.e(TAG, "PlaceholderFragment2 onStart: >>>>>>>" );
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        Log.e(TAG, "PlaceholderFragment onResume: >>>>>>>" );
+        Log.e(TAG, "PlaceholderFragment2 onResume: >>>>>>>" );
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        Log.e(TAG, "PlaceholderFragment onPause: >>>>>>>" );
+        Log.e(TAG, "PlaceholderFragment2 onPause: >>>>>>>" );
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        Log.e(TAG, "PlaceholderFragment onStop: >>>>>>>" );
+        Log.e(TAG, "PlaceholderFragment2 onStop: >>>>>>>" );
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        Log.e(TAG, "PlaceholderFragment onResume: >>>>>>>" );
+        Log.e(TAG, "PlaceholderFragment2 onResume: >>>>>>>" );
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.e(TAG, "PlaceholderFragment onDestroy: >>>>>>>" );
+        Log.e(TAG, "PlaceholderFragment2 onDestroy: >>>>>>>" );
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        Log.e(TAG, "PlaceholderFragment onDetach: >>>>>>>" );
+        Log.e(TAG, "PlaceholderFragment2 onDetach: >>>>>>>" );
     }
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        Log.e(TAG, "PlaceholderFragment onSaveInstanceState: >>>>>>>" );
+        Log.e(TAG, "PlaceholderFragment2 onSaveInstanceState: >>>>>>>" );
     }
 }

@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.graphics.BitmapCompat;
 
 import com.bumptech.glide.load.Options;
 import com.bumptech.glide.load.engine.Resource;
@@ -40,5 +41,9 @@ public class MyTranscoder implements ResourceTranscoder<Bitmap, byte[]> {
 
         BytesResource bytesResource = new BytesResource(os.toByteArray());
         return bytesResource;
+    }
+
+    private void ssss(){
+
     }
 }
