@@ -1,15 +1,17 @@
 package com.zjh.appui.ui.fragments;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public abstract class LazyFragment extends Fragment {
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.trello.rxlifecycle3.components.RxFragment;
+
+public abstract class LazyFragment extends RxFragment {
     private static final String TAG = "LazyFragment";
 
     //接收fragment 布局view的变量
@@ -19,14 +21,13 @@ public abstract class LazyFragment extends Fragment {
     //是否第一次创建的标志位
     boolean mIsFirstVisible = true;
 
-    // 为了获得 Fragment 不可见的状态，和再次回到可见状态的判断，
-    // 我们还需要增加一个 currentVisibleState 标志位，
-
-
-    // 该标志位在 onResume 中和 onPause 中结合 getUserVisibleHint 的返回值
-    // 来决定是否应该回调可见和不可见状态函数
-
-    //当前fragment 可见、不可见标示
+    /**
+     * 为了获得 Fragment 不可见的状态，和再次回到可见状态的判断，
+     * 我们还需要增加一个 currentVisibleState 标志位，
+     * 该标志位在 onResume 中和 onPause 中结合 getUserVisibleHint 的返回值
+     * 来决定是否应该回调可见和不可见状态函数
+     * 当前fragment 可见、不可见标示
+     */
     boolean currentVisibleState = false;
 
     @Nullable
@@ -41,13 +42,12 @@ public abstract class LazyFragment extends Fragment {
         // 将 View 创建完成标志位设为 true
         isViewCreated = true;
         Log.d(TAG, "onCreateView: ");
-        // 本次分发主要时用于分发默认tab可见状态，
-        // 这种状况下它的生命周期是：1 fragment setUserVisibleHint: true-》
-        // onAttach-》onCreate-》onCreateView-》onResume
-
-        // 默认 Tab getUserVisibleHint() = true !isHidden() = true
-        // 对于非默认 tab 或者非默认显示的 Fragment 在该生命周期中只做了 isViewCreated 标志位设置
-        // 可见状态将不会在这里分发
+        /**
+         * 本次分发主要时用于分发默认tab可见状态，这种状况下它的生命周期是：1 fragment setUserVisibleHint: true-》onAttach-》onCreate-》onCreateView-》onResume
+         * 默认 Tab getUserVisibleHint() = true !isHidden() = true
+         * 对于非默认 tab 或者非默认显示的 Fragment 在该生命周期中只做了 isViewCreated 标志位设置
+         * 可见状态将不会在这里分发
+         */
         if (!isHidden() && getUserVisibleHint()) {
             dispatchUserVisibleHint(true);
         }
@@ -58,29 +58,28 @@ public abstract class LazyFragment extends Fragment {
 
     protected abstract void initView(View view);
 
-
-    //修改fragment的可见性
-    //setUserVisibleHint 被调用有两种情况：
-    // 1） 在切换tab的时候，会先于所有fragment的其他生命周期，先调用这个函数，可以看log，
-    //     对于默认 tab 和 间隔 checked tab 需要等到 isViewCreated = true 后才可以通过此通知用户可见
-
-
-    //2）对于之前已经调用过setUserVisibleHint 方法的fragment后，让fragment从可见到不可见之间状态的变化
+    /***
+     * 修改fragment的可见性,setUserVisibleHint 被调用有两种情况：
+     * 1）在切换tab的时候，会先于所有fragment的其他生命周期，先调用这个函数，可以看log，
+     *     对于默认 tab 和 间隔 checked tab 需要等到 isViewCreated = true 后才可以通过此通知用户可见
+     * 2）对于之前已经调用过setUserVisibleHint 方法的fragment后，让fragment从可见到不可见之间状态的变化
+     * @param isVisibleToUser
+     */
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         Log.d(TAG, "setUserVisibleHint: ");
-        //  对于情况1）不予处理，用 isViewCreated 进行判断，如果isViewCreated false，说明它没有被创建
+
+        /***
+         *  对于情况1）不予处理，用 isViewCreated 进行判断，如果isViewCreated false，说明它没有被创建
+         *  对于情况2）要分情况考虑：
+         *              2.1）如果是不可见->可见是下面的情况 ；
+         *               2.2）如果是可见->不可见是下面的情况
+         *   对于2.1）我们需要如何判断呢？首先必须是可见的（isVisibleToUser 为true）
+         *   而且只有当可见状态进行改变的时候才需要切换（此时就添加了currentVisibleState来辅助判断），
+         *   否则会出现反复调用的情况,从而导致事件分发带来的多次更新,对于2.2）如果是可见->不可见，判断条件恰好和 2.1）相反
+         */
         if (isViewCreated) {
-            //对于情况2）要分情况考虑：
-            // 2.1）如果是不可见->可见是下面的情况 ；
-            // 2.2）如果是可见->不可见是下面的情况
-
-            //对于2.1）我们需要如何判断呢？首先必须是可见的（isVisibleToUser 为true）
-            // 而且只有当可见状态进行改变的时候才需要切换（此时就添加了currentVisibleState来辅助判断），
-            // 否则会出现反复调用的情况,从而导致事件分发带来的多次更新
-            //对于2.2）如果是可见->不可见，判断条件恰好和 2.1）相反
-
             if (isVisibleToUser && !currentVisibleState ) {
                 dispatchUserVisibleHint(true);
             } else if (!isVisibleToUser && currentVisibleState) {
