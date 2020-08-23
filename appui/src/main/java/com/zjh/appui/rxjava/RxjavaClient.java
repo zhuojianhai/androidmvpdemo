@@ -9,10 +9,18 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
+import io.reactivex.Single;
+import io.reactivex.SingleObserver;
+import io.reactivex.SingleSource;
+import io.reactivex.SingleTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
+import io.reactivex.internal.operators.observable.ObservableCreate;
+import io.reactivex.internal.operators.single.SingleJust;
+import io.reactivex.internal.operators.single.SingleMap;
+import io.reactivex.plugins.RxJavaPlugins;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
 import io.reactivex.subjects.ReplaySubject;
@@ -20,10 +28,11 @@ import io.reactivex.subjects.ReplaySubject;
 public class RxjavaClient {
     public static void main(String[] args) {
 
-        showRxjava();
+//        showRxjava();
 //        testPublish();
 //        testReplaySubject();
 
+        showSingle();
     }
 
     private static  void testPublish(){
@@ -76,7 +85,7 @@ public class RxjavaClient {
 
     private static void showRxjava(){
 
-        Observable<String> observable = Observable.create(new ObservableOnSubscribe<String>() {
+        ObservableCreate<String> observable =(ObservableCreate) Observable.create(new ObservableOnSubscribe<String>() {
             @Override
             public void subscribe(ObservableEmitter<String> emitter) throws Exception {
                 for (int i=0;i<10;i++) {
@@ -112,7 +121,7 @@ public class RxjavaClient {
         };
 
         observable
-                .subscribeOn(Schedulers.trampoline())
+                .subscribeOn(Schedulers.io())
                 .subscribeOn(Schedulers.computation())
                 .map(new Function<String, String>() {
                     @Override
@@ -123,5 +132,81 @@ public class RxjavaClient {
                 })
                 .observeOn(Schedulers.trampoline())
                 .subscribe(observer);
+    }
+
+    private  static void showSingle(){
+        //hook
+        RxJavaPlugins.setOnSingleAssembly(new Function<Single, Single>() {
+            @Override
+            public Single apply(Single single) throws Exception {
+
+                return single;
+            }
+        });
+        SingleJust<Integer> singleJust = (SingleJust<Integer>) Single.just(1);
+
+        SingleMap<Integer,String> singleMap = (SingleMap<Integer,String>) singleJust.map(new Function<Integer, String>() {
+            @Override
+            public String apply(Integer integer) throws Exception {
+                return integer.toString();
+            }
+        });
+        SingleMap<String,String>  singleMap2 = ( SingleMap<String,String>)singleMap.map(new Function<String, String>() {
+            @Override
+            public String apply(String s) throws Exception {
+                return s+"  new string";
+            }
+        });
+
+        SingleObserver<String> singleObserver = new SingleObserver<String>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onSuccess(String s) {
+                System.out.println(s);
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+        };
+        singleMap2
+                .compose(new SingleTransformer<String, String>() {
+            @Override
+            public SingleSource<String> apply(Single<String> upstream) {
+                return upstream;
+            }
+        })
+                .observeOn(Schedulers.io()).subscribe(singleObserver);
+    }
+
+    private void showInterval(){
+        Observable.interval(1000,1000,TimeUnit.MICROSECONDS)
+                .subscribe(new Observer<Long>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Long aLong) {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 }

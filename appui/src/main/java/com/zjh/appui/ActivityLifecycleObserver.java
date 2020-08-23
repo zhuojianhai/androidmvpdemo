@@ -11,7 +11,6 @@ public class ActivityLifecycleObserver implements LifecycleObserver {
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     void onCreate(){
         Log.e(TAG, "onCreate: 监听" );
-
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
