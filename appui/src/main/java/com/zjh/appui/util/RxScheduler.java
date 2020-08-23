@@ -8,6 +8,9 @@ import io.reactivex.schedulers.Schedulers;
 
 public class RxScheduler {
 
+    /**
+     * 切换线程的统一封装
+     */
     static final ObservableTransformer OBSERVABLE_TRANSFORMER = new ObservableTransformer() {
         @Override
         public ObservableSource apply(Observable upstream) {
