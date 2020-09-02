@@ -12,13 +12,23 @@ public class EndRunnable {
 		@Override
 		public void run() {
 
-			String threadName = Thread.currentThread().getName();
-			boolean isInterrupt = Thread.currentThread().isInterrupted();
-			while(Thread.currentThread().isInterrupted()) {
-				System.out.println(threadName+" is run!");
+			try {
+				String threadName = Thread.currentThread().getName();
+				boolean isInterrupt = Thread.currentThread().isInterrupted();
+
+				while(!Thread.currentThread().isInterrupted()) {
+					System.out.println(threadName+" is run!");
+
+				}
+				System.out.println(threadName+" interrput flag is "
+						+Thread.currentThread().isInterrupted());
+			}catch (Exception e){
+				System.out.println(Thread.currentThread().getName()+" interrput flag is "
+						+Thread.currentThread().isInterrupted());
+				Thread.currentThread().interrupt();
+				e.printStackTrace();
 			}
-			System.out.println(threadName+" interrput flag is "
-					+Thread.currentThread().isInterrupted());
+
 		}			
 	}
 
@@ -26,7 +36,7 @@ public class EndRunnable {
 		UseRunnable useRunnable = new UseRunnable();
 		Thread endThread = new Thread(useRunnable,"endThread");
 		endThread.start();
-		Thread.sleep(20);
+		Thread.sleep(2000);
 		endThread.interrupt();
 	}
 

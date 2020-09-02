@@ -68,6 +68,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import dalvik.system.PathClassLoader;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -92,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button button10;
     Button button11;
 
+    RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -351,6 +353,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Type list = new TypeToken<List<String>>() {
         }.getType();
+
+
+        PathClassLoader pathClassLoader = new PathClassLoader();
 
     }
 

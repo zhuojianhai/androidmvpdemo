@@ -7,6 +7,8 @@ dependencies {
     api 'com.google.dagger:dagger:2.26'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.26'
     implementation files('libs/gson-2.2.4.jar')
+    implementation 'org.apache.commons:commons-lang3:3.4'
+
 }
 
 sourceCompatibility = "8"

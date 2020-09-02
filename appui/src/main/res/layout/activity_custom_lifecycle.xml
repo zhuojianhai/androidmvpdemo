@@ -6,7 +6,70 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".CustomLifecycleActivity">
+    <FrameLayout
+        android:background="@mipmap/ic_launcher"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_300"
+        >
+        <ImageView
+            android:src="@mipmap/ic_launcher_round"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_30"
+            android:layout_gravity="center_horizontal">
+        </ImageView>
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/fen_dian_role_rb"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+                android:checked="true"
+                android:drawableBottom="@drawable/login_tab_bottom"
+                android:gravity="center_horizontal"
+                android:paddingTop="15dp"
+                android:text="标题1"
+                android:textColor="@color/color_tab_analysis"
+                android:textSize="15.35sp" />
+            <RadioButton
+                android:id="@+id/fen_dian_role_rb1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+                android:drawableBottom="@drawable/login_tab_bottom"
+                android:gravity="center_horizontal"
+                android:paddingTop="15dp"
+                android:text="标题2"
+                android:textColor="@color/color_tab_analysis"
+                android:textSize="15.35sp" />
 
+            <RadioButton
+                android:id="@+id/fen_dian_role_rb2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+                android:drawableBottom="@drawable/login_tab_bottom"
+                android:gravity="center_horizontal"
+                android:paddingTop="15dp"
+                android:text="标题32"
+                android:textColor="@color/color_tab_analysis"
+                android:textSize="15.35sp" />
+
+
+        </RadioGroup>
+
+    </FrameLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <LinearLayout
         android:layout_marginTop="@dimen/dp_20"
         android:layout_marginRight="@dimen/dp_33"
@@ -188,5 +251,6 @@
 
         </TextView>
 
+    </LinearLayout>
     </LinearLayout>
 </LinearLayout>

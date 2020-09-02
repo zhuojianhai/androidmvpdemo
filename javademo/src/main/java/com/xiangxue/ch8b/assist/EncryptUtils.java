@@ -1,6 +1,7 @@
 package com.xiangxue.ch8b.assist;
 
-import org.apache.commons.lang.StringUtils;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.security.DigestException;
 import java.security.MessageDigest;
