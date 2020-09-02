@@ -1,6 +1,13 @@
 apply plugin: 'com.android.application'
-def config = rootProject.ext
+//插件文件名称--resources-->meta-inf---gradle-plugin文件夹下的文件名称
+apply plugin: 'com.zjh.plugin'
 
+
+patch{
+    debugOn true
+    applicationName 'com.example.myaidl'
+}
+def config = rootProject.ext
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"

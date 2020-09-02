@@ -355,7 +355,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }.getType();
 
 
-        PathClassLoader pathClassLoader = new PathClassLoader();
 
     }
 
