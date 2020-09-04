@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 
+apply plugin: 'com.jakewharton.butterknife'
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
@@ -48,4 +50,12 @@ dependencies {
     implementation 'com.trello.rxlifecycle3:rxlifecycle:3.0.0'
     implementation 'com.trello.rxlifecycle3:rxlifecycle-android:3.0.0'
     implementation 'com.trello.rxlifecycle3:rxlifecycle-components:3.0.0'
+
+
+    /** RecyclerView Adapter */
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.40'
+
+    /**butterknife 引用*/
+    implementation 'com.jakewharton:butterknife:10.2.3'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
 }

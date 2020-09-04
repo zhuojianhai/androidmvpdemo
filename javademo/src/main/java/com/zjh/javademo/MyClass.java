@@ -9,10 +9,20 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class MyClass {
 
     public static void main(String[] args) {
+        random();
+    }
+    private static void random(){
+        Random random = new Random();
+        int staus = random.nextInt(3);
+        System.out.println("status "+staus);
+
+    }
+    private static void ss(){
         LinkedList<String> data = new LinkedList<>();
         data.add("data");
 
@@ -36,8 +46,6 @@ public class MyClass {
         TypeToken token = new TypeToken<List<String>>(){
 
         };
-
-
 
     }
 

@@ -1,6 +1,7 @@
 package com.example.myaidl;
 
 import android.annotation.SuppressLint;
+import android.app.LauncherActivity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -359,6 +360,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void showImage() {
+
 
         ImageView img = new ImageView(this);
         Glide.with(this).load("").placeholder(R.drawable.ic_launcher_background).fitCenter().into(img);

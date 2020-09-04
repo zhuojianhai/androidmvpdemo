@@ -235,6 +235,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_43"
             android:text="登录"
+            android:id="@+id/bt_login"
             android:textColor="@color/colorWhite"
             android:background="@drawable/login_btn"
             android:textSize="@dimen/dp_16">
