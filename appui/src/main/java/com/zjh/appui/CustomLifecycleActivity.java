@@ -8,9 +8,15 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleEventObserver;
+import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LifecycleRegistry;
+import androidx.lifecycle.Observer;
+
+import com.zjh.appui.databinding.MyDataBindingDemoActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,6 +35,19 @@ public class CustomLifecycleActivity extends Activity implements LifecycleOwner 
 
         mLifecycleRegistry = new LifecycleRegistry(this);
         mLifecycleRegistry.setCurrentState(Lifecycle.State.CREATED);
+
+        subscribeLifecycleEvent();
+    }
+
+    private void subscribeLifecycleEvent() {
+        //监听activity的生命周期
+       getLifecycle().addObserver(new LifecycleEventObserver() {
+           @Override
+           public void onStateChanged(@NonNull LifecycleOwner source, @NonNull Lifecycle.Event event) {
+               System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+event);
+           }
+       });
+
     }
 
     @OnClick(R.id.bt_login)
@@ -50,6 +69,17 @@ public class CustomLifecycleActivity extends Activity implements LifecycleOwner 
     }
 
 
+    @OnClick({R.id.bt_login})
+    public void onClick(View view){
+        int id = view.getId();
+        switch (id){
+            case R.id.bt_login:
+                Intent intent = new Intent(this, MyDataBindingDemoActivity.class);
+                startActivity(intent);
+                break;
+        }
+
+    }
     @NonNull
     @Override
     public Lifecycle getLifecycle() {

@@ -1,6 +1,7 @@
 package com.example.myaidl;
 
 import android.annotation.SuppressLint;
+import android.app.IntentService;
 import android.app.LauncherActivity;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -47,6 +48,10 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Looper;
+import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -422,6 +427,45 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         }
+
+    }
+
+       static  Handler handler = new Handler(){
+           @Override
+           public void handleMessage(@NonNull Message msg) {
+               super.handleMessage(msg);
+           }
+       };
+
+    private void showMsg(){
+        final Message msg = Message.obtain();
+        msg.obj = "hello world";
+        handler.sendMessage(msg);
+
+
+        new Thread(new Runnable() {
+            Handler myHandler;
+            @Override
+            public void run() {
+                Looper.prepare();
+                myHandler = new Handler();
+
+                Looper.loop();
+            }
+        }).start();
+
+
+    }
+    private void myHandlerMsg(Handler handler){
+        HandlerThread handlerThread = new HandlerThread("1");
+        IntentService intentService = new IntentService("intentService") {
+            @Override
+            protected void onHandleIntent(@Nullable Intent intent) {
+
+
+            }
+        };
+
 
     }
 }
