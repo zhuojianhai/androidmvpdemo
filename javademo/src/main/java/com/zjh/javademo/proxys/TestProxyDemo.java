@@ -1,14 +1,16 @@
 package com.zjh.javademo.proxys;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.math.BigDecimal;
+
+import sun.misc.ProxyGenerator;
 
 //import sun.misc.ProxyGenerator;
 
 public class TestProxyDemo {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         MoneyService  target = new MoneyServiceImpA();
 
         MoneyInvocationHandler handler = new MoneyInvocationHandler(target);
@@ -34,5 +36,16 @@ public class TestProxyDemo {
 //            e.printStackTrace();
 //        }
 
+
+        byte[] bytes = ProxyGenerator.generateProxyClass("$proxyself",target.getClass().getInterfaces());
+        OutputStream outputStream = null;
+        try {
+            outputStream = new FileOutputStream("./proxyself.class");
+            outputStream.write(bytes);
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            outputStream.close();
+        }
     }
 }

@@ -10,6 +10,9 @@ import android.os.Bundle;
 import com.zjh.appui.R;
 import com.zjh.appui.beans.GoodsBean;
 
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+
 public class MyDataBindingDemoActivity extends AppCompatActivity {
 
     @Override
@@ -25,5 +28,18 @@ public class MyDataBindingDemoActivity extends AppCompatActivity {
 
         LiveData liveData;
         MutableLiveData<String> data = new MutableLiveData<>();
+
+        CompositeDisposable compositeDisposable = new CompositeDisposable();
+        compositeDisposable.add(new Disposable() {
+            @Override
+            public void dispose() {
+
+            }
+
+            @Override
+            public boolean isDisposed() {
+                return false;
+            }
+        });
     }
 }
