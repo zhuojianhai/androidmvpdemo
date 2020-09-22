@@ -14,7 +14,7 @@ public class TestGenericArrayTypeBean<T> {
     private T singleValue;
 
 
-    public static void main(String[] args) {
+    private static void method1(){
         Field[] fields = TestGenericArrayTypeBean.class.getDeclaredFields();
 
         for (Field field:fields) {
@@ -30,7 +30,10 @@ public class TestGenericArrayTypeBean<T> {
                         + (((GenericArrayType) field.getGenericType()).getGenericComponentType()));
             }
         }
+    }
+    public static void main(String[] args) {
 
-        }
+
+    }
 
 }

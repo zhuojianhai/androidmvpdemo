@@ -14,7 +14,12 @@ import java.util.Random;
 public class MyClass {
 
     public static void main(String[] args) {
-        random();
+//        random();
+
+        System.out.println("2<<35   "+(2<<35));
+
+        System.out.println(-35%32);
+        System.out.println(35/32);
     }
     private static void random(){
         Random random = new Random();
