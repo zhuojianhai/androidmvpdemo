@@ -6,8 +6,6 @@ import java.util.concurrent.TimeUnit;
  * 
  *
  *
- *更多课程咨询 安生老师 QQ：669100976  VIP课程咨询 依娜老师  QQ：2470523467
- *
  *类说明：线程休眠辅助工具类
  */
 public class SleepTools {

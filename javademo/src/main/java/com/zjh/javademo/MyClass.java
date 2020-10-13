@@ -16,10 +16,11 @@ public class MyClass {
     public static void main(String[] args) {
 //        random();
 
-        System.out.println("2<<35   "+(2<<35));
-
-        System.out.println(-35%32);
-        System.out.println(35/32);
+//        System.out.println("2<<35   "+(2<<35));
+//
+//        System.out.println(-35%32);
+//        System.out.println(35/32);
+        sh();
     }
     private static void random(){
         Random random = new Random();
@@ -66,5 +67,10 @@ public class MyClass {
             }
             System.out.println();
         }
+    }
+
+    private static void sh(){
+        int i = 1;
+        System.out.println(i<<16);
     }
 }

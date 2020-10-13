@@ -2,6 +2,7 @@ package com.zjh.javademo.reflect;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.GenericArrayType;
+import java.lang.reflect.TypeVariable;
 import java.util.List;
 
 public class TestGenericArrayTypeBean<T> {
@@ -32,6 +33,15 @@ public class TestGenericArrayTypeBean<T> {
         }
     }
     public static void main(String[] args) {
+
+        try {
+            Field field = TestGenericArrayTypeBean.class.getDeclaredField("singleValue");
+            if (field.getGenericType() instanceof TypeVariable){
+                System.out.println(field.getGenericType().getTypeName());
+            }
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
 
 
     }
