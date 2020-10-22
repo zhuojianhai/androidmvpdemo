@@ -5,10 +5,17 @@ buildscript {
     repositories {
         google()
         jcenter()
+        //自定义的plugin 插件上传到本地仓库
+        mavenLocal()
 
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.5.2'
+        //自定的插件
+        classpath 'com.zjh:jiagu:1.0'
+
+        classpath 'com.jakewharton:butterknife-gradle-plugin:10.2.3'
+
 //        classpath 'com.google.dagger:dagger-compiler:2.19'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

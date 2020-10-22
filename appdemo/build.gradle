@@ -44,5 +44,19 @@ dependencies {
 // Dagger 2 的编译时注解处理器（必须）
     annotationProcessor 'com.google.dagger:dagger-compiler:2.19'
 
+    //rx生命周期处理 依赖并使用lifecycle
+//    api 'com.trello:rxlifecycle2:2.2'
+//    api 'com.trello:rxlifecycle-android2:2.2'
+//    api 'com.trello:rxlifecycle-components2:2.2'
+
+//    implementation 'com.trello.rxlifecycle2:rxlifecycle-components:2.1.0@aar'
+//    implementation 'com.trello.rxlifecycle3:rxlifecycle-components:3.0.0@aar'
+    implementation 'com.trello:rxlifecycle-components:0.3.0@aar'
+
+    /** 动态权限申请 */
+    implementation 'com.yanzhenjie:permission:2.0.3'
+
+
+
 
 }

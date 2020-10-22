@@ -9,10 +9,26 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class MyClass {
 
     public static void main(String[] args) {
+//        random();
+
+//        System.out.println("2<<35   "+(2<<35));
+//
+//        System.out.println(-35%32);
+//        System.out.println(35/32);
+        sh();
+    }
+    private static void random(){
+        Random random = new Random();
+        int staus = random.nextInt(3);
+        System.out.println("status "+staus);
+
+    }
+    private static void ss(){
         LinkedList<String> data = new LinkedList<>();
         data.add("data");
 
@@ -37,8 +53,6 @@ public class MyClass {
 
         };
 
-
-
     }
 
     private static  void show(){
@@ -53,5 +67,10 @@ public class MyClass {
             }
             System.out.println();
         }
+    }
+
+    private static void sh(){
+        int i = 1;
+        System.out.println(i<<16);
     }
 }

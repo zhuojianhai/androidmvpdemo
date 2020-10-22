@@ -9,8 +9,12 @@ public class TestTypeVariableBean<K extends Number,T> {
     //T 没有指定的上边界，默认就是Object
     T value;
 
-    public static void main(String[] args) {
-        Type[]  types = TestTypeVariableBean.class.getTypeParameters();
+    private static void show(){
+        Class<?> clazz = TestTypeVariableBean.class;
+
+        //获得泛型类上的参数
+        Type[]  types = clazz.getTypeParameters();
+
 
         for (Type type:types){
             TypeVariable typeVariable = (TypeVariable) type;
@@ -24,6 +28,10 @@ public class TestTypeVariableBean<K extends Number,T> {
             //输出所在的类的类型
             System.out.println("--getGenericDeclaration()--" +  typeVariable.getGenericDeclaration());
         }
+    }
+    public static void main(String[] args) {
+
+
     }
 
 }

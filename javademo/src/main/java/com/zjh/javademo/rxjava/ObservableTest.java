@@ -5,22 +5,27 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subjects.BehaviorSubject;
 
 public class ObservableTest {
     private static  String TAG = "ObservableTest";
     public static void main(String[] args) {
-        showObservabelInfo();
+//        showObservabelInfo();
 //
 //        ObservableTest bt = new ObservableTest();
 //        bt.ss();
+
+        takeUntils();
     }
 
 
@@ -90,5 +95,20 @@ public class ObservableTest {
         };
 
         observable.subscribe(observer);
+    }
+
+    private static void takeUntils(){
+        Observable.interval(1, TimeUnit.SECONDS).
+                subscribeOn(Schedulers.io())
+                .takeUntil(Observable.timer(5, TimeUnit.SECONDS)).
+                subscribe(new Consumer<Long>() {
+                    @Override
+                    public void accept(Long num) throws Exception {
+                        System.out.println("running num : " + num.toString());
+                    }
+                });
+    }
+    private void showSubject(){
+//        BehaviorSubject<>
     }
 }

@@ -45,36 +45,60 @@ public class ReferenceClass {
     }
 
 
-    public static void main(String[] args) {
+    private static  void method1(){
         try {
             ReferenceClass instance = ReferenceClass.class.newInstance();
 
-        Field fields[] = ReferenceClass.class.getDeclaredFields();
-        for (Field f:fields){
-            f.setAccessible(true);
-            Type type = f.getGenericType();
-            if (type instanceof ParameterizedType){
-                System.out.println(type);
-            }else{
-                System.out.println("####f.getName()####" +f.getName());;
-                //获得属性的类型
-               String fieldTypeString =  f.getType().getSimpleName();
-               if(fieldTypeString.equals("int")){
-                   f.set(instance,100);
-               }else if(fieldTypeString.equals("String")){
-                   f.set(instance,"zhuojianhai");
-               }
+            Field fields[] = ReferenceClass.class.getDeclaredFields();
+            for (Field f:fields){
+                f.setAccessible(true);
+                Type type = f.getGenericType();
+                if (type instanceof ParameterizedType){
+                    System.out.println(type);
+                }else{
+                    System.out.println("####f.getName()####" +f.getName());;
+                    //获得属性的类型
+                    String fieldTypeString =  f.getType().getSimpleName();
+                    if(fieldTypeString.equals("int")){
+                        f.set(instance,100);
+                    }else if(fieldTypeString.equals("String")){
+                        f.set(instance,"zhuojianhai");
+                    }
 
+                }
             }
-        }
 
             System.out.println("=================");
-        for (Field f:fields){
-            f.setAccessible(true);
-            System.out.println(f.get(instance));;
-        }
+            for (Field f:fields){
+                f.setAccessible(true);
+                System.out.println(f.get(instance));;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private static void method2() {
+
+
+        try {
+            Class<?> clazz = ReferenceClass.class;
+            Field field = clazz.getDeclaredField("hashMap");
+            Type type = field.getGenericType();
+            if (type instanceof ParameterizedType){
+                ParameterizedType parameterizedType = (ParameterizedType) type;
+               Type[] actual =  parameterizedType.getActualTypeArguments();
+                for (Type at: actual) {
+                    System.out.println(at);
+                }
+
+            }
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
+
+    }
+    public static void main(String[] args) {
+        method2();
     }
 }

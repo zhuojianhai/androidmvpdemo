@@ -1,6 +1,13 @@
 apply plugin: 'com.android.application'
-def config = rootProject.ext
+//插件文件名称--resources-->meta-inf---gradle-plugin文件夹下的文件名称
+apply plugin: 'com.zjh.plugin'
 
+
+patch{
+    debugOn true
+    applicationName 'com.example.myaidl'
+}
+def config = rootProject.ext
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -49,6 +56,7 @@ dependencies {
 
 
     //测试相关
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
@@ -62,7 +70,7 @@ dependencies {
     //implementation 'com.github.lecho:hellocharts-android:v1.5.8'
     //在壳中，导入各业务组件即可。
     if (isNeedModule.toBoolean()) {
-        implementation project(path:':module-home')
+        implementation project(path: ':module-home')
         implementation project(path: ':module-other')
         implementation project(path: ':module-me')
     }

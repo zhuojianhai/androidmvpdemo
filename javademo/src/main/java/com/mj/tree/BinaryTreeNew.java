@@ -67,6 +67,26 @@ public class BinaryTreeNew<E> implements BinaryTreeInfo {
 			}
 		}
 	}
+	public void preorder3(){
+		if (root == null) return;
+		Node<E> node = root;
+		Stack<Node> stack = new Stack<>();
+		while (true){
+			if (node!=null){
+				//访问node节点
+				System.out.println(node.element);
+				//将右节点入栈
+				stack.push(node.right);
+				//向左走
+				node = node.left;
+			}else if(stack.isEmpty()) {
+				return;//二叉树遍历结束
+			}else {
+				//处理右边
+				node = stack.pop();
+			}
+		}
+	}
 
 	public void inorder(Visitor<E> visitor) {
 		if (visitor == null || root == null) return;
@@ -84,6 +104,28 @@ public class BinaryTreeNew<E> implements BinaryTreeInfo {
 				// 访问node节点
 				if (visitor.visit(node.element)) return;
 				// 让右节点进行中序遍历
+				node = node.right;
+			}
+		}
+	}
+
+	public void inorder1(){
+		if (root == null) return;
+
+		Stack<Node> stack = new Stack<>();
+		Node<E> node = root;
+		while (true){
+			if (node!=null){
+				//根入栈
+				stack.push(node);
+				//向左走
+				node = node.left;
+			}else if (stack.isEmpty()){
+				return;
+			}else {
+				node = stack.pop();
+				System.out.println(node.element);
+				//让右节点进行中序遍历
 				node = node.right;
 			}
 		}
