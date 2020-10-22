@@ -30,6 +30,7 @@ import com.example.myaidl.activities.CustomerViewActivity;
 import com.example.myaidl.activities.ScableImageViewActivity;
 import com.example.myaidl.activities.TouchViewActivity;
 import com.example.myaidl.bean.Book;
+import com.example.myaidl.hookactivity.HookHelper;
 import com.example.myaidl.login.LoginActivity;
 import com.example.myaidl.ui.main.PlaceholderFragment;
 import com.example.myaidl.ui.main.PlaceholderFragment2;
@@ -39,6 +40,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -98,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button button9;
     Button button10;
     Button button11;
+    Button button12;
 
     RecyclerView recyclerView;
     @Override
@@ -200,6 +203,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         button9 = findViewById(R.id.bt9);
         button10 = findViewById(R.id.bt10);
         button11 = findViewById(R.id.bt11);
+        button12 = findViewById(R.id.bt12);
 
 
         button1.setOnClickListener(this);
@@ -213,6 +217,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         button9.setOnClickListener(this);
         button10.setOnClickListener(this);
         button11.setOnClickListener(this);
+        button12.setOnClickListener(this);
 
         final String pattern = "[^\\d+\\.?\\d{0,2}]";
         num_et2.addTextChangedListener(new TextWatcher() {
@@ -292,6 +297,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             SurfaceView surfaceView = new SurfaceView(this);
 
+
+        }else if (v==button12){
+            try {
+                HookHelper.replaceInstrumentation(this);
+                Intent intent = new Intent(this,LoginActivity.class);
+                startActivity(intent);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
 
         }
     }

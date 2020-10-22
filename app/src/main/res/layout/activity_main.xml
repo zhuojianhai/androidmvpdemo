@@ -111,9 +111,17 @@
             android:id="@+id/bt11"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="arouter 跳转">
+            android:text="自定义ScableImageView">
 
         </Button>
+        <Button
+            android:id="@+id/bt12"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Hook Activity 方式1">
+
+        </Button>
+
     </LinearLayout>
 
 </ScrollView>
