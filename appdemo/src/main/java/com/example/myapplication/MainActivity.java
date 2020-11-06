@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
@@ -9,21 +10,15 @@ import com.example.myaidl.IZJHAidl;
 import com.example.myaidl.bean.Book;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.tabs.TabLayout;
-
-import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.IBinder;
 import android.os.RemoteException;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.myapplication.ui.main.SectionsPagerAdapter;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -91,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    @SuppressLint("WrongConstant")
     @Override
     public void onClick(View v) {
         if (v == bindBtn) {
