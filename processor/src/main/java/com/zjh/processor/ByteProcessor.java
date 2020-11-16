@@ -88,7 +88,7 @@ public class ByteProcessor extends AbstractProcessor {
             for (Element element : sets) {
                 //每一个元素由于只能是类，所以都是TypeElement类型
                 if (element instanceof TypeElement) {
-                    //获取定义你该注解的元素(这里是类)的全路径名称
+                    //获取定义你该注解的元素(这里是类)的全路径名称 javapoet类
                     String implName = TypeName.get(element.asType()).toString();
                     //对应的接口全路径类名
                     String interName;

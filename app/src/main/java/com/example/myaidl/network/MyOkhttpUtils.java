@@ -1,7 +1,13 @@
 package com.example.myaidl.network;
 
+import java.io.BufferedOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.InetAddress;
+import java.net.URL;
+import java.net.URLConnection;
 import java.net.UnknownHostException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -99,5 +105,68 @@ public class MyOkhttpUtils {
 
             }
         });
+    }
+
+    /**
+     * 使用java 原生的URLConnection去执行网络请求
+     *
+     * @param path
+     */
+    public void showUrlconnction(String path){
+        URLConnection urlConnection;
+        InputStream inputStream = null;
+        OutputStream outputStream = null;
+        OutputStreamWriter outputStreamWriter = null;
+
+        try {
+            URL url = new URL(path);
+            //打开和URl之间的连接
+            urlConnection = url.openConnection();
+
+            //设置通用属性
+            urlConnection.setRequestProperty("accept","*/*");
+            urlConnection.setRequestProperty("connection","keep-Alive");
+            urlConnection.setRequestProperty("user-agent","Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+
+            urlConnection.setDoInput(true);
+            urlConnection.setDoOutput(true);
+
+            //建立实际的链接
+            urlConnection.connect();
+
+            //得到输出流，发送请求数据
+            outputStream = urlConnection.getOutputStream();
+            outputStreamWriter = new OutputStreamWriter(new BufferedOutputStream(outputStream));
+
+            outputStreamWriter.write("version=10");
+            outputStreamWriter.flush();
+            outputStreamWriter.close();
+
+            //得到输入流，得到请求的内容
+            inputStream = urlConnection.getInputStream();
+
+        }catch (Exception e){
+            e.printStackTrace();
+
+        }finally {
+
+            try {
+                if (outputStream!=null){
+                    outputStream.close();
+                }
+                if (outputStreamWriter!=null){
+                    outputStreamWriter.close();
+                }
+
+                if (inputStream!=null){
+                    inputStream.close();
+                }
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+        }
+
     }
 }
