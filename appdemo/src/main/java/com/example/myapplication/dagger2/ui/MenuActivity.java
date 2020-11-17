@@ -13,7 +13,6 @@ import com.example.myapplication.dagger2.impl.Chef;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import javax.inject.Inject;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -28,6 +27,8 @@ public class MenuActivity extends AppCompatActivity {
         Menu menu = new Menu(menus);
         Chef chef = new Chef(menu);
         System.out.println(chef.cook());
+
+        System.out.println(">>>>>>>>>>>>>>>>>酸菜鱼>>>>");
     }
 
 

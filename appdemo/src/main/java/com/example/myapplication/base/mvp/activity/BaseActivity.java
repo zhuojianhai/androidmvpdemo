@@ -75,7 +75,6 @@ public class BaseActivity extends RxAppCompatActivity implements BaseView {
 
     @Override
     public void showRequestLoading() {
-        LiveData
 
     }
 

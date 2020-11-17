@@ -125,10 +125,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         transaction.add(PlaceholderFragment.newInstance(1),"placeholderFragment");
 //        transaction.add(PlaceholderFragment2.newInstance(2),"placeholderFragment2");
         transaction.commit();
+
+
+        System.out.println("》》》》》》》》》》》》》》》》》》》》了十几个两三加固");
     }
 
     @Override
-    protected void onStart() {
+   protected void onStart() {
         super.onStart();
         Log.e(TAG, "onStart: >>>>>" );
     }
