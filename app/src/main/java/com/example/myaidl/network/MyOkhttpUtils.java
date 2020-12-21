@@ -9,8 +9,20 @@ import java.net.InetAddress;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.UnknownHostException;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.SecureRandom;
+import java.security.cert.Certificate;
+import java.security.cert.CertificateFactory;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.TrustManagerFactory;
+import javax.net.ssl.X509TrustManager;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -60,7 +72,10 @@ import okio.BufferedSink;
  *
  */
 public class MyOkhttpUtils {
-
+    OkHttpClient okHttpClient = null;
+    public MyOkhttpUtils(){
+        okHttpClient = new OkHttpClient.Builder().build();
+    }
     public void show(){
         OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
             @Override
@@ -168,5 +183,93 @@ public class MyOkhttpUtils {
 
         }
 
+    }
+
+    public static void setSelfSign() throws Exception{
+        //创建sslContext对象，设置信任管理器
+        SSLContext sslContext = SSLContext.getInstance("TLS");
+        TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+        //
+        KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
+
+        //清空默认证书信息，设置自己证书
+        keyStore.load(null);
+
+        CertificateFactory cf = CertificateFactory.getInstance("X.509");
+
+
+
+    }
+
+    public static void setCertificates(InputStream... certificates){
+
+        try
+        {
+            CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509");
+            KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
+            keyStore.load(null);
+            int index = 0;
+            for (InputStream certificate : certificates)
+            {
+                String certificateAlias = Integer.toString(index++);
+                keyStore.setCertificateEntry(certificateAlias, certificateFactory.generateCertificate(certificate));
+
+                try
+                {
+                    if (certificate != null)
+                        certificate.close();
+                } catch (IOException e)
+                {
+                }
+            }
+
+            SSLContext sslContext = SSLContext.getInstance("TLS");
+
+            TrustManagerFactory trustManagerFactory =
+                    TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+
+            trustManagerFactory.init(keyStore);
+            sslContext.init
+                    (
+                            null,
+                            trustManagerFactory.getTrustManagers(),
+                            new SecureRandom()
+                    );
+            OkHttpClient.Builder builder = new OkHttpClient.Builder();
+            builder.sslSocketFactory(sslContext.getSocketFactory());
+//            builder.sslSocketFactory(sslContext.getSocketFactory(),  trustManagerFactory.getTrustManagers());
+
+
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void shows() throws Exception {
+
+        TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+
+        trustManagerFactory.init((KeyStore) null);
+
+       TrustManager[] trustManagers = trustManagerFactory.getTrustManagers();
+
+      if (trustManagers.length != 1 || !(trustManagers[0] instanceof X509TrustManager)) {
+         throw new IllegalStateException("Unexpected default trust managers:"
+                             + Arrays.toString(trustManagers));
+     }
+
+      X509TrustManager trustManager = (X509TrustManager) trustManagers[0];
+
+       SSLContext sslContext = SSLContext.getInstance("TLS");
+
+       sslContext.init(null, new TrustManager[] { trustManager }, null);
+
+       SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
+
+
+       OkHttpClient client = new OkHttpClient.Builder()
+                    .sslSocketFactory(sslSocketFactory, trustManager).build();
     }
 }

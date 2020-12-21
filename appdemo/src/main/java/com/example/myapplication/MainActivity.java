@@ -86,7 +86,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    @SuppressLint("WrongConstant")
     @Override
     public void onClick(View v) {
         if (v == bindBtn) {

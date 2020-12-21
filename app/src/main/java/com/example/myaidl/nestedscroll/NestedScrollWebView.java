@@ -25,7 +25,7 @@ public class NestedScrollWebView extends WebView implements NestedScrollingChild
 
     private boolean isSelfFling;
     private boolean hasFling;
-    private final float density;
+    private float density;
     private int mWebViewContentHeight;
     private int mMaximumVelocity;
     private int maxScrollY;
