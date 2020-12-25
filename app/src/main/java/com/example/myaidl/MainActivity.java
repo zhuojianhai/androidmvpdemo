@@ -5,20 +5,11 @@ import android.app.IntentService;
 import android.app.LauncherActivity;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.BitmapRegionDecoder;
-import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
+
 import android.os.Bundle;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.Target;
+
 import com.example.myaidl.activities.CoordinatLayout1Activity;
 import com.example.myaidl.activities.CoordinatLayout2Activity;
 import com.example.myaidl.activities.CoordinatLayout3Activity;
@@ -36,11 +27,8 @@ import com.example.myaidl.ui.main.PlaceholderFragment;
 import com.example.myaidl.ui.main.PlaceholderFragment2;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.tabs.TabLayout;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -50,40 +38,15 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.os.Looper;
-import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-
-import com.example.myaidl.ui.main.SectionsPagerAdapter;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Type;
-import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import dalvik.system.PathClassLoader;
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Function;
-import io.reactivex.functions.Predicate;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private String TAG = "MainActivity";
@@ -123,7 +86,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(PlaceholderFragment.newInstance(1),"placeholderFragment");
-//        transaction.add(PlaceholderFragment2.newInstance(2),"placeholderFragment2");
         transaction.commit();
 
 
@@ -326,163 +288,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void showRXjavademo() {
-        final Disposable[] mDisposable = new Disposable[1];
-        Observable<String> observable = Observable.create(new ObservableOnSubscribe<String>() {
-            @Override
-            public void subscribe(ObservableEmitter<String> emitter) throws Exception {
-
-            }
-        });
-        observable = observable.map(new Function<String, String>() {
-            @Override
-            public String apply(String s) throws Exception {
-                return s.toUpperCase();
-            }
-        }).filter(new Predicate<String>() {
-            @Override
-            public boolean test(String s) throws Exception {
-                return !s.isEmpty();
-            }
-        });
-
-        Observer<String> observer = new Observer<String>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-                mDisposable[0] = d;
-            }
-
-            @Override
-            public void onNext(String s) {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        };
-
-        observable.subscribe(observer);
-
-
-        Gson gson = new Gson();
-        gson.fromJson("", Book.class);
-
-        Type list = new TypeToken<List<String>>() {
-        }.getType();
 
 
 
-    }
-
-    private void showImage() {
-
-
-        ImageView img = new ImageView(this);
-        Glide.with(this).load("").placeholder(R.drawable.ic_launcher_background).fitCenter().into(img);
-
-
-        Glide.with(this).load("").listener(new RequestListener<Drawable>() {
-            @Override
-            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                return false;
-            }
-
-            @Override
-            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                return false;
-            }
-        }).into(img);
-
-
-        Glide.get(this).clearMemory();//清理内存缓存 可以在UI主线程中进行
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Glide.get(MainActivity.this).clearDiskCache();//清理磁盘缓存 需要在子线程中执行
-            }
-        }).start();
-
-        Glide.with(this).applyDefaultRequestOptions(new RequestOptions());
-    }
-
-    @SuppressLint("ResourceType")
-    private void showBitmap(){
-        InputStream inputStream = null;
-        BitmapRegionDecoder decoder = null;
-        try {
-            inputStream = getResources().openRawResource(R.drawable.avatar_rengwuxian);
-            decoder  = BitmapRegionDecoder.newInstance(inputStream,false);
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inMutable = true;
-            options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-
-            Rect rect = new Rect();
-            rect.left = 0;
-            rect.top = 0;
-            rect.right = 100;
-            rect.bottom = 100;
-
-            decoder.decodeRegion(rect,options);
-
-        }catch (Exception e){
-            e.printStackTrace();
-
-        }finally {
-            if (inputStream!=null){
-                try {
-                    inputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-    }
-
-       static  Handler handler = new Handler(){
-           @Override
-           public void handleMessage(@NonNull Message msg) {
-               super.handleMessage(msg);
-           }
-       };
-
-    private void showMsg(){
-        final Message msg = Message.obtain();
-        msg.obj = "hello world";
-        handler.sendMessage(msg);
-
-
-        new Thread(new Runnable() {
-            Handler myHandler;
-            @Override
-            public void run() {
-                Looper.prepare();
-                myHandler = new Handler();
-
-                Looper.loop();
-            }
-        }).start();
-
-
-    }
-    private void myHandlerMsg(Handler handler){
-        HandlerThread handlerThread = new HandlerThread("1");
-        IntentService intentService = new IntentService("intentService") {
-            @Override
-            protected void onHandleIntent(@Nullable Intent intent) {
-
-
-            }
-        };
-
-
-    }
 }

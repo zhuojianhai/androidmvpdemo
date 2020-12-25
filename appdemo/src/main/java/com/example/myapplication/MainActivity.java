@@ -1,6 +1,5 @@
 package com.example.myapplication;
 
-import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
@@ -9,8 +8,6 @@ import android.os.Bundle;
 import com.example.myaidl.IZJHAidl;
 import com.example.myaidl.bean.Book;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.IBinder;
 import android.os.RemoteException;
@@ -18,6 +15,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -86,6 +85,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+
+    private void addBookToServer(){
+        Book book = new Book();
+        book.setBookId(index);
+        book.setBookName("天龙八部"+index);
+        book.setBookPublisher("云南大理出版社"+index);
+        try {
+            izjhAidl.addBook(book);
+            index +=10;
+            tv.setText("重置内容区域");
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void onClick(View v) {
         if (v == bindBtn) {
@@ -107,27 +121,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     e.printStackTrace();
                 }
             }else{
-                Toast.makeText(this,"服务还未绑定",Toast.LENGTH_LONG).show();
+                Toast.makeText(this,"服务还未绑定", Toast.LENGTH_LONG).show();
             }
 
 
-        } else if (v == fab) {
-            Snackbar.make(v, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
-        }
-    }
-
-    private void addBookToServer(){
-        Book book = new Book();
-        book.setBookId(index);
-        book.setBookName("天龙八部"+index);
-        book.setBookPublisher("云南大理出版社"+index);
-        try {
-            izjhAidl.addBook(book);
-            index +=10;
-            tv.setText("重置内容区域");
-        } catch (RemoteException e) {
-            e.printStackTrace();
         }
     }
 }

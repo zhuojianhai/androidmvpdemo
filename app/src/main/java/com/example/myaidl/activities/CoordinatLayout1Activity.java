@@ -23,7 +23,6 @@ import android.widget.Toast;
 
 import com.example.myaidl.R;
 
-import org.w3c.dom.Text;
 
 public class CoordinatLayout1Activity extends AppCompatActivity {
 

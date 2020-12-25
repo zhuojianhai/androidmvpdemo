@@ -1,12 +1,8 @@
-include ':app',':appdemo', ':myphoneapplication', ':javademo'
+include ':app',':appdemo',  ':javademo'
 rootProject.name='MyAidl'
-include ':processor'
-include ':annotation'
+
 include ':module-home'
 include ':module-other'
 include ':module-me'
 include ':lib-base'
-include ':appui'
-include ':plugin'
-include ':mvvmdemo'
-include ':activityhookdemo'
+
