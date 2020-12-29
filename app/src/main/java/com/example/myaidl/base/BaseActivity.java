@@ -1,62 +1,49 @@
 package com.example.myaidl.base;
 
-
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * view 层持有P层对象，
+ * P层已经持有View层和M层
+ * @param <P>
+ * @param <CONTRACT>
+ */
+public abstract class BaseActivity<P extends BasePresenter,CONTRACT> extends AppCompatActivity implements View.OnClickListener,BaseView{
+    public abstract CONTRACT getContract();
 
-
-public abstract class BaseActivity<P extends BasePresenter,CONTRACT> extends RxAppCompatActivity implements View.OnClickListener{
-    public Activity mActivity;
     public P mPresenter;
+    public abstract  P getmPresenterInstance();
 
-    public abstract  CONTRACT getContract();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPresenter = getmPresenterInstatnce();
-        mPresenter.bindView(this);
         setContentView(getContentViewId());
 
+        initViews();
+        initListener();
         initData();
-        initView();
-        initEvent();
 
+        mPresenter = getmPresenterInstance();
+        mPresenter.bindView(this);
     }
+
     protected abstract void initData();
-    protected abstract void initView();
-    protected abstract void initEvent();
 
 
-    @Override
-    public void setContentView(View view) {
-        super.setContentView(view);
-      //  ButterKnife.bind(this);
-        mActivity = this;
-    }
+    public abstract  void initViews();
+    public abstract  void initListener();
+    public abstract  int getContentViewId();
 
-    @Override
-    public void setContentView(int layoutResID) {
-        super.setContentView(layoutResID);
-       // ButterKnife.bind(this);
-        mActivity = this;
-    }
-
-    protected abstract P getmPresenterInstatnce();
-
-    protected abstract int getContentViewId();
+    public abstract <ERROR extends Object> void responseError(ERROR error,Throwable throwable);
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(mPresenter!=null){
-            mPresenter.unBindView();
-        }
-        destory();
+        onDestory();
     }
-
-    protected abstract void destory();
+    public abstract  void onDestory();
 }

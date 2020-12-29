@@ -7,21 +7,20 @@ package com.example.myaidl.base;
  * @param <V>
  * @param <M>
  */
-public abstract  class BasePresenter<V extends BaseActivity,M extends BaseModel,CONTRACT> extends SuperBase<CONTRACT> {
+public abstract  class BaseFragmentPresenter<V extends BaseFragment,M extends BaseModel,CONTRACT> extends SuperBase<CONTRACT> {
     public V mView;
     public M mModel;
-    
-    public BasePresenter(){
+
+    public BaseFragmentPresenter(){
         this.mModel = getMoelInstance();
     }
 
     protected abstract M getMoelInstance();
 
-    //P 层和 V 层绑定
     public void bindView(V mView){
         this.mView = mView;
     }
-    //P 层和 V 层解绑
+
     public void unBindview(){
         mView = null;
     }

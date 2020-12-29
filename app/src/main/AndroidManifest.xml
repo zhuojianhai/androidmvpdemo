@@ -18,7 +18,7 @@
         <activity android:name=".activities.CustomerLayoutActivity" />
         <activity android:name=".activities.CustomerViewActivity" />
         <activity android:name=".movie.MovieActivity" />
-        <activity android:name=".login.LoginActivity" />
+        <activity android:name=".login2.LoginActivity2" />
         <activity android:name=".base.BaseActivity" />
         <activity
             android:name=".activities.CoordinatLayout5Activity"

@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.example.myaidl.IZJHAidl;
 import com.example.myaidl.bean.Book;
+import com.example.myapplication.login.LoginActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import android.os.IBinder;
@@ -123,8 +124,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }else{
                 Toast.makeText(this,"服务还未绑定", Toast.LENGTH_LONG).show();
             }
-
-
+        }else if(v == fab){
+            Intent intent = new Intent(this, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
         }
     }
 }

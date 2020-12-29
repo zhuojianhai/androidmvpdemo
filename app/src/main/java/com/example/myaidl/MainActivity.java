@@ -245,23 +245,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
 
         }else if (v == button11) {
-//            Intent intent = new Intent(MainActivity.this, ScableImageViewActivity.class);
-//            startActivity(intent);
 
             ARouter.getInstance().build("/com/zjh/module/home/ui/login").navigation();
-
-            FragmentManager f = getSupportFragmentManager();
-            FragmentTransaction ft = f.beginTransaction();
-           Fragment fragment =  f.findFragmentByTag("placeholderFragment");
-           ft.setMaxLifecycle(fragment, Lifecycle.State.DESTROYED);
-
-
-           ViewPager viewPager = new ViewPager(this);
-           viewPager.setAdapter(new MyPagerAdapter());
-
-
-            SurfaceView surfaceView = new SurfaceView(this);
-
 
         }else if (v==button12){
             try {
@@ -275,18 +260,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    class  MyPagerAdapter extends PagerAdapter{
-
-        @Override
-        public int getCount() {
-            return 0;
-        }
-
-        @Override
-        public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-            return false;
-        }
-    }
 
 
 

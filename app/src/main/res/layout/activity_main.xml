@@ -111,7 +111,7 @@
             android:id="@+id/bt11"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="自定义ScableImageView">
+            android:text="组件化跳转登录">
 
         </Button>
         <Button
